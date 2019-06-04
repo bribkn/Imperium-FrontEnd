@@ -13,9 +13,8 @@ code {
 
 /* Each page CSS */
 .page-wrapper{
-    padding: 0% 3.5%;
+    padding: 1.5% 3.5%;
     margin-left: 20%;
-    margin-top: 1.5%;
     width: 80%;
     font-family: "Helvetica Neue";
 }
