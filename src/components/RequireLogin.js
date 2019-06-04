@@ -10,7 +10,7 @@ class RequireLogin extends Component{
         this.SaveSession = this.SaveSession.bind(this);
         this.ResetLogIn = this.ResetLogIn.bind(this);
 
-        this.host = "http://localhost:8000";
+        this.host = "http://imperium-be.herokuapp.com";
         this.state = {
             submitted: false,
             show: true,
@@ -40,7 +40,6 @@ class RequireLogin extends Component{
         if ( typeof( CurrentFetchedUser ) !== 'undefined' ) {
             console.log('Encontramos coincidencia en DB, logeandote.');
             localStorage.setItem('UserLoggedIn', 'true');
-            localStorage.setItem('UserRUT', CurrentFetchedUser.rut);
         }else{
             console.log('Las credenciales no corresponden. uwu');
             this.SwapLoginModal();
