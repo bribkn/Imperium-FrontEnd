@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
-// dejar esto solo como el formulario
-// agregar un loginhandler???
-// agregar un loginrequire
-
-class LoginForm extends Component{
+class RequireLogin extends Component{
     constructor(props, context){
         super(props, context);
 
@@ -39,10 +35,12 @@ class LoginForm extends Component{
 
     SaveSession(){
         var CurrentFetchedUser = this.state.fetchedUser;
+        console.log(CurrentFetchedUser);
 
         if ( typeof( CurrentFetchedUser ) !== 'undefined' ) {
             console.log('Encontramos coincidencia en DB, logeandote.');
             localStorage.setItem('UserLoggedIn', 'true');
+            localStorage.setItem('UserRUT', CurrentFetchedUser.rut);
         }else{
             console.log('Las credenciales no corresponden. uwu');
             this.SwapLoginModal();
@@ -116,4 +114,4 @@ class LoginForm extends Component{
     }
 }
 
-export default LoginForm;
+export default RequireLogin;

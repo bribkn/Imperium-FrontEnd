@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LoginForm from '../components/LoginForm';
+import RequireLogin from '../components/RequireLogin';
 import Block from '../components/Block';
 
 import '../App.css';
@@ -9,7 +9,7 @@ class Dashboard extends Component {
     render() {
         return (
             <div>
-                <LoginForm />
+                <RequireLogin />
                 <div className="page-title">
                     <h1>Escritorio</h1>
                     <hr />
