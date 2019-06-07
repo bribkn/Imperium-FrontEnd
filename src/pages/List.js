@@ -7,22 +7,16 @@ import '../App.css';
 import '../css/Dashboard.css';
 import '../css/Checkbox.css';
 
-class List extends React.Component {
-   state = { checked: false }
+class List extends Component {
 
-    handleCheckboxChange = event => {
-        this.setState({ checked: event.target.checked })
-    }
+
 
     render() {
         return (
             <label>
-                <span style={{ marginLeft: 8 }}>Brian Bastías</span>
                 <Checkbox
-                    checked={this.state.checked}
-                    onChange={this.handleCheckboxChange}
+                    title= "Brian Bastías"
                 />
-                <span style={{ marginLeft: 8 }}>Brian Bastías</span>
             </label>
         )
     }

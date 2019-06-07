@@ -6,6 +6,7 @@ import Navigation from './components/Navigation';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import StudentData from './pages/StudentData';
+import List from './pages/List';
 
 class App extends Component {
     render(){
@@ -19,6 +20,7 @@ class App extends Component {
                         <Route path="/Dashboard" component={Dashboard} />
                         <Route path="/Profile" component={Profile} />
                         <Route path="/StudentData" component={StudentData} />
+                        <Route path="/List" component={List} />
                     </div>
                 </div>
             </Router>
