@@ -5,7 +5,7 @@ import RequireLogin from '../components/RequireLogin';
 import '../App.css';
 import '../css/Dashboard.css';
 
-class Dashboard extends Component {
+class StudentData extends Component {
     constructor(props, context){
         super(props, context);
         this.UpdateData = this.UpdateData.bind(this);
@@ -28,19 +28,31 @@ class Dashboard extends Component {
         this.setState({ UserName: localStorage.getItem('UserName') })
     }
 
+    GetStudentsData(){
+
+    }
+
     render() {
+        const { UserLoggedIn } = this.state;
+        const { UserName } = this.state;
+
         return (
             <div>
                 <RequireLogin UpdateData = {this.UpdateData} />
 
                 <div className="page-title">
-                    <h1>Escritorio</h1>
+                    <h1>Datos de alumnos</h1>
                     <hr />
                 </div>
 
                 <div className="row">
                     <div className="col">
-                        <Block title="chaito" msg="holita" />
+                        {
+                            (UserLoggedIn === 'true')?
+                            <Block title={"Bienvenido, "+UserName } msg="holita" />
+                            :
+                            <Block title="Inicia sesión" msg="holita" />
+                        }
                     </div>
                 </div>
             </div>
@@ -48,4 +60,4 @@ class Dashboard extends Component {
     }
 }
 
-export default Dashboard;
+export default StudentData;

@@ -17,6 +17,22 @@ class Navigation extends Component{
                                 </div>
                             </Link>
                         </li>
+
+                        <li>
+                            <Link to="/Profile">
+                                <div className="button-wrapper">
+                                    <i className="fa fa-book fa-fw"></i>Mi Perfil
+                                </div>
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link to="/StudentData">
+                                <div className="button-wrapper">
+                                    <i className="fa fa-book fa-fw"></i>Datos de alumnos
+                                </div>
+                            </Link>
+                        </li>
                     </ul>
                 </div>
             </div>
