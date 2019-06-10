@@ -83,7 +83,6 @@ class RequireLogin extends Component{
     // If not, reopens the Login Modal
     SaveSession(){
         var CurrentFetchedUser = this.state.FetchedUser;
-        // console.log(CurrentFetchedUser);
 
         if ( typeof( CurrentFetchedUser ) !== 'undefined' ) {
             console.log('Encontramos coincidencia en DB, logeandote.');

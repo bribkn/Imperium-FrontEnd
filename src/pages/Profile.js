@@ -12,6 +12,9 @@ class Profile extends Component {
         this.UpdateData = this.UpdateData.bind(this);
         this.RequireLogin = React.createRef();
 
+        // this.URL = "https://imperium-be.herokuapp.com";
+        this.URL = "http://localhost:8000";
+
         this.state = {
             UserLoggedIn: false,
             UserRUT: 0,
@@ -22,27 +25,38 @@ class Profile extends Component {
             UserRol: '',
             PersonalDatas: [],
             PersonalData: {
-                id: '',
-                description: '',
-                times_bought: 0,
-                times_sold: 0,
-                type: '',
-                color: '',
-                sell_price: 0
+                rut: 0,
+                nombre: '',
+                apellido: '',
+                telefono: '',
+                direccion: '',
+                rol: 0,
             }
         }
     }
 
-    // get session values (logged in or not)
+    // once logged in,
     componentDidMount(){
         this.UpdateData();
+    }
+
+    GetPersonalData = _ => {
+        var FetchURL = this.URL+`/users/search?rut=`+this.state.UserRUT;
+        console.log(FetchURL);
+
+        fetch(FetchURL)
+        .then(response => response.json())
+        .then(resp => this.setState({ PersonalDatas: resp.data }))
+        .catch(err => console.error(err))
     }
 
     // This function updates session data
     // gets called from RequireLogin.js
     UpdateData(){
+        this.setState({ UserRUT: localStorage.getItem('UserRUT') }, () => {
+            this.GetPersonalData();
+        })
         this.setState({ UserLoggedIn: localStorage.getItem('UserLoggedIn') })
-        this.setState({ UserRUT: localStorage.getItem('UserRUT') })
         this.setState({ UserName: localStorage.getItem('UserName') })
         this.setState({ UserNick: localStorage.getItem('UserNick') })
         this.setState({ UserContact: localStorage.getItem('UserContact') })
@@ -50,9 +64,12 @@ class Profile extends Component {
         this.setState({ UserRol: localStorage.getItem('UserRol') })
     }
 
+    RenderPersonalData = ({rut, nombre, apellido, telefono, direccion, rol}) => <div key={rut}>{rut}<br /> {nombre} <br /> {apellido} <br /> {telefono} <br /> {direccion} <br /></div>
+
     render() {
         const { UserLoggedIn } = this.state;
         const { UserName } = this.state;
+        const { PersonalDatas } = this.state;
 
         return (
             <div>
@@ -70,6 +87,12 @@ class Profile extends Component {
                             <div>
                                 <Block title={"Bienvenido, "+UserName } msg=
                                     <div>
+                                        {
+                                            PersonalDatas.length?
+                                            PersonalDatas.map(this.RenderPersonalData)
+                                            :
+                                            <div>Loading...</div>
+                                        }
                                         <button onClick={this.RequireLogin.current.HandleLogout} className="btn btn-primary">Logout</button>
                                     </div>
                                 />
