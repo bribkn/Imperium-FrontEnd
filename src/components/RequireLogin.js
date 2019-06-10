@@ -101,7 +101,7 @@ class RequireLogin extends Component{
         this.props.UpdateData();
     }
 
-    // This function helps Modal to be turn On/Off
+    // This function helps Modal to be turn On/Off.
     SwapLoginModal() {
         var CurrentShowState = this.state.Show;
         this.setState({ Show: !CurrentShowState });
