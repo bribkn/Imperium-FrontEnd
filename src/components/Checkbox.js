@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
 
-
-// const Checkbox = props => (
-//    <div className="checkbox-container">
-//       <div className="info-checkbox">
-//          <input type="checkbox" {...props} />
-//       </div>
-//    </div>
-//
-// )
-
 class Checkbox extends Component{
-    constructor(props) {
+
+    constructor(props){
         super(props);
 
+        this.state ={
+            checked: false
+        }
     }
+
+    handleCheckboxChange = event => {
+        this.setState({ checked: event.target.checked })
+        console.log("Cambiando ticket: %s", this.state.checked);
+    }
+
     render(){
         return(
             <div className="checkbox-container">
-                <div className="info-checkbox">
-                </div>
+               <div className="info-checkbox">
+                    <input type="checkbox" checked={this.state.checked} onChange={this.handleCheckboxChange} />
+                    {this.props.title}
+               </div>
             </div>
         )
     }
