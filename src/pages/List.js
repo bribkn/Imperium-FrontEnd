@@ -17,6 +17,12 @@ class List extends Component {
                 <Checkbox
                     title= "Brian Bastías"
                 />
+                <Checkbox
+                    title= "Brian Bastías"
+                />
+                <Checkbox
+                    title= "Brian Bastías"
+                />
             </label>
         )
     }
