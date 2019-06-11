@@ -91,13 +91,15 @@ class Profile extends Component {
                                     <div>
                                         {
                                             PersonalDatas.length?
-                                            PersonalDatas.map(this.RenderPersonalData)
+                                            <div>
+                                            {PersonalDatas.map(this.RenderPersonalData)}
+                                            <button onClick={this.RequireLogin.current.HandleLogout} className="btn btn-primary">Logout</button>
+                                            </div>
                                             :
                                             <Spinner animation="border" role="status">
                                                 <span className="sr-only">Loading...</span>
                                             </Spinner>
                                         }
-                                        <button onClick={this.RequireLogin.current.HandleLogout} className="btn btn-primary">Logout</button>
                                     </div>
                                 }
                                 />

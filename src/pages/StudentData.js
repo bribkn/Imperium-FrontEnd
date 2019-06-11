@@ -66,6 +66,7 @@ class StudentData extends Component {
         this.setState({ UserAddress: localStorage.getItem('UserAddress') })
         this.setState({ UserRol: localStorage.getItem('UserRol') })
     }
+
     RenderStudent = ({id,nombre,apellido,nivel,patente_furgon,curso,tipo_viaje,sector}) =>
         <tr key={id}>
             <td>{id}</td>
@@ -77,6 +78,7 @@ class StudentData extends Component {
             <td>{tipo_viaje}</td>
             <td>{sector}</td>
         </tr>
+        
     render() {
         const { UserLoggedIn } = this.state;
         const { Students } = this.state;
