@@ -27,15 +27,6 @@ class List extends Component {
             UserContact: '',
             UserAddress: '',
             UserRol: '',
-            PersonalDatas: [],
-            PersonalData: {
-                rut: 0,
-                nombre: '',
-                apellido: '',
-                telefono: '',
-                direccion: '',
-                rol: 0,
-            },
             Students: [],
             Student:{
                 id: 0,
@@ -55,16 +46,7 @@ class List extends Component {
         this.UpdateData();
     }
 
-    GetPersonalData = _ => {
-        var FetchURL = this.URL+`/users/search?rut=`+this.state.UserRUT;
-        console.log(FetchURL);
-
-        fetch(FetchURL)
-        .then(response => response.json())
-        .then(resp => this.setState({ PersonalDatas: resp.data }))
-        .catch(err => console.error(err))
-    }
-    getStudentsData = _ =>{
+    GetStudentsData = _ =>{
         var FetchURL = this.URL+`/students/tio?rut=`+this.state.UserRUT;
         console.log(FetchURL);
         fetch(FetchURL)
@@ -77,8 +59,7 @@ class List extends Component {
     // gets called from RequireLogin.js
     UpdateData(){
         this.setState({ UserRUT: localStorage.getItem('UserRUT') }, () => {
-            this.GetPersonalData();
-            this.getStudentsData();
+            this.GetStudentsData();
         })
         this.setState({ UserLoggedIn: localStorage.getItem('UserLoggedIn') })
         this.setState({ UserName: localStorage.getItem('UserName') })
@@ -87,8 +68,6 @@ class List extends Component {
         this.setState({ UserAddress: localStorage.getItem('UserAddress') })
         this.setState({ UserRol: localStorage.getItem('UserRol') })
     }
-
-    RenderPersonalData = ({rut, nombre, apellido, telefono, direccion, rol}) => <div key={rut}>{rut}<br /> {nombre} <br /> {apellido} <br /> {telefono} <br /> {direccion} <br /></div>
     RenderStudent = ({id,nombre,apellido,nivel,patente_furgon,curso,tipo_viaje,sector}) =>
         <tr key={id}>
             <td>{nombre}</td>
@@ -139,22 +118,5 @@ class List extends Component {
         );
     }
 }
-//
-//     render() {
-//         return (
-//             <label>
-//                 <Checkbox
-//                     title= "Brian Bastías"
-//                 />
-//                 <Checkbox
-//                     title= "Brian Bastías"
-//                 />
-//                 <Checkbox
-//                     title= "Brian Bastías"
-//                 />
-//             </label>
-//         )
-//     }
-// }
 
 export default List  ;
