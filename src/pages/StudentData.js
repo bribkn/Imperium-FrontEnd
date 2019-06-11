@@ -92,33 +92,32 @@ class StudentData extends Component {
                     </div>
                         {
                             (UserLoggedIn === 'true')?
-                            <div>
-                                <Table striped bordered hover variant="dark">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Nombre</th>
-                                            <th>Apellido</th>
-                                            <th>Nivel</th>
-                                            <th>Patente</th>
-                                            <th>Curso</th>
-                                            <th>Tipo Viaje</th>
-                                            <th>Sector</th>
-                                        </tr>
-                                     </thead>
-                                     <tbody>
-                                        {
-                                            Students.length?
-                                            Students.map(this.RenderStudent)
-                                            :
-                                            <Spinner animation="border" role="status">
-                                                <span className="sr-only">Loading...</span>
-                                            </Spinner>
-
-                                        }
-                                    </tbody>
-                                </Table>
-                            </div>
+                                (Students.length)?
+                                <div>
+                                    <Table striped bordered hover variant="dark">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Nombre</th>
+                                                <th>Apellido</th>
+                                                <th>Nivel</th>
+                                                <th>Patente</th>
+                                                <th>Curso</th>
+                                                <th>Tipo Viaje</th>
+                                                <th>Sector</th>
+                                            </tr>
+                                         </thead>
+                                         <tbody>
+                                            {
+                                                Students.map(this.RenderStudent)
+                                            }
+                                        </tbody>
+                                    </Table>
+                                </div>
+                                :
+                                <Spinner animation="border" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </Spinner>
                             :
                             <Block title="Inicia sesión" msg="Debes iniciar sesión antes de continuar." />
                         }

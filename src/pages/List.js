@@ -68,12 +68,12 @@ class List extends Component {
         this.setState({ UserAddress: localStorage.getItem('UserAddress') })
         this.setState({ UserRol: localStorage.getItem('UserRol') })
     }
-    RenderStudent = ({id,nombre,apellido,nivel,patente_furgon,curso,tipo_viaje,sector}) =>
+    RenderStudent = ({id, nombre, apellido}) =>
         <tr key={id}>
             <td>{nombre}</td>
             <td>{apellido}</td>
                 <Checkbox
-                    title= "Hola"
+                    title= "Hola" name= {nombre + apellido}
                 />
         </tr>
     render() {
@@ -89,28 +89,27 @@ class List extends Component {
                     </div>
                         {
                             (UserLoggedIn === 'true')?
-                            <div>
-                                <Table striped bordered hover variant="dark">
-                                    <thead>
-                                        <tr>
-                                            <th>Nombre</th>
-                                            <th>Apellido</th>
-                                            <th>Asistencia</th>
-                                        </tr>
-                                     </thead>
-                                     <tbody>
-                                        {
-                                            Students.length?
-                                            Students.map(this.RenderStudent)
-                                            :
-                                            <Spinner animation="border" role="status">
-                                                <span className="sr-only">Loading...</span>
-                                            </Spinner>
-
-                                        }
-                                    </tbody>
-                                </Table>
-                            </div>
+                                (Students.length)?
+                                <div>
+                                    <Table striped bordered hover variant="dark">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>Apellido</th>
+                                                <th>Asistencia</th>
+                                            </tr>
+                                         </thead>
+                                         <tbody>
+                                            {
+                                                Students.map(this.RenderStudent)
+                                            }
+                                        </tbody>
+                                    </Table>
+                                </div>
+                                :
+                                <Spinner animation="border" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </Spinner>
                             :
                             <Block title="Inicia sesión" msg="Debes iniciar sesión antes de continuar." />
                         }
