@@ -69,13 +69,11 @@ class List extends Component {
         this.setState({ UserRol: localStorage.getItem('UserRol') })
     }
     RenderStudent = ({id, nombre, apellido}) =>
-        <tr key={id}>
-            <td>{nombre}</td>
-            <td>{apellido}</td>
+        <div key={id}>
                 <Checkbox
-                    title= "Hola" name= {nombre + apellido}
+                    title= "Hola" name= {nombre + " "+ apellido}
                 />
-        </tr>
+        </div>
     render() {
         const { UserLoggedIn } = this.state;
         const { Students } = this.state;
@@ -91,20 +89,9 @@ class List extends Component {
                             (UserLoggedIn === 'true')?
                                 (Students.length)?
                                 <div>
-                                    <Table striped bordered hover variant="dark">
-                                        <thead>
-                                            <tr>
-                                                <th>Nombre</th>
-                                                <th>Apellido</th>
-                                                <th>Asistencia</th>
-                                            </tr>
-                                         </thead>
-                                         <tbody>
                                             {
                                                 Students.map(this.RenderStudent)
                                             }
-                                        </tbody>
-                                    </Table>
                                 </div>
                                 :
                                 <Spinner animation="border" role="status">

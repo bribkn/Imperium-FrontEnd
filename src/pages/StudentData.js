@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import RequireLogin from '../components/RequireLogin';
 import Block from '../components/Block';
-import Checkbox from '../components/Checkbox';
 import {Spinner,Table} from 'react-bootstrap'
 
 import '../App.css';
 import '../css/Dashboard.css';
-import '../css/Checkbox.css';
 
 class StudentData extends Component {
 

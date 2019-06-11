@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button,ButtonGroup} from 'react-bootstrap'
+import {ButtonGroup,ToggleButton} from 'react-bootstrap'
 
 
 class Checkbox extends Component{
@@ -29,20 +29,37 @@ class Checkbox extends Component{
 
     render(){
         return(
-               <td>
-                    <ButtonGroup aria-label="Basic example">
-                        <Button variant="success" onClick={this.handleTrue} size="lg">
-                            <i className="fa fa-check" aria-hidden="true"></i>
-                        </Button>
-                        <Button variant="danger" onClick = {this.handleFalse} size="lg">
-                            <i className="fa fa-times" aria-hidden="true"></i>
-                        </Button>
-                    </ButtonGroup>
-                    <font size="4">{this.props.title}</font>
-               </td>
+            <div>
+                {
+                    this.props.name
+                }
+                <ButtonGroup toggle className="mt-3">
+                <ToggleButton type="radio" name="radio" defaultChecked value="1">
+                    <i className="fa fa-check" aria-hidden="true"></i>
+                </ToggleButton>
+                <ToggleButton type="radio" name="radio" value="2">
+                    <i className="fa fa-times" aria-hidden="true"></i>
+                </ToggleButton>
+                <ToggleButton type="radio" name="radio" value="3">
+                    <i class="fa fa-user-times" aria-hidden="true"></i>
+                </ToggleButton>
+                </ButtonGroup>
+            </div>
+
         )
     }
 }
         // &nbsp;
+        // <td>
+        //      <ButtonGroup aria-label="Basic example">
+        //          <Button variant="success" onClick={this.handleTrue} size="lg">
+        //              <i className="fa fa-check" aria-hidden="true"></i>
+        //          </Button>
+        //          <Button variant="danger" onClick = {this.handleFalse} size="lg">
+        //              <i className="fa fa-times" aria-hidden="true"></i>
+        //          </Button>
+        //      </ButtonGroup>
+        //      <font size="4">{this.props.title}</font>
+        // </td>
 
 export default Checkbox;
