@@ -68,6 +68,7 @@ class List extends Component {
         this.setState({ UserAddress: localStorage.getItem('UserAddress') })
         this.setState({ UserRol: localStorage.getItem('UserRol') })
     }
+<<<<<<< HEAD
     RenderStudent = ({id, nombre, apellido, nivel, patente_furgon, curso, tipo_viaje, sector}) =>
         <tr key={id}>
             <td>{nombre}</td>
@@ -75,6 +76,14 @@ class List extends Component {
             <Checkbox title= "Hola" />
         </tr>
 
+=======
+    RenderStudent = ({id, nombre, apellido}) =>
+        <div key={id}>
+                <Checkbox
+                    title= "Hola" name= {nombre + " "+ apellido}
+                />
+        </div>
+>>>>>>> 1dceec0ec30c900ef3d513a6885fb5cf786e6054
     render() {
         const { UserLoggedIn } = this.state;
         const { Students } = this.state;
@@ -88,28 +97,16 @@ class List extends Component {
                     </div>
                         {
                             (UserLoggedIn === 'true')?
-                            <div>
-                                <Table striped bordered hover variant="dark">
-                                    <thead>
-                                        <tr>
-                                            <th>Nombre</th>
-                                            <th>Apellido</th>
-                                            <th>Asistencia</th>
-                                        </tr>
-                                     </thead>
-                                     <tbody>
-                                        {
-                                            Students.length?
-                                            Students.map(this.RenderStudent)
-                                            :
-                                            <Spinner animation="border" role="status">
-                                                <span className="sr-only">Loading...</span>
-                                            </Spinner>
-
-                                        }
-                                    </tbody>
-                                </Table>
-                            </div>
+                                (Students.length)?
+                                <div>
+                                            {
+                                                Students.map(this.RenderStudent)
+                                            }
+                                </div>
+                                :
+                                <Spinner animation="border" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </Spinner>
                             :
                             <Block title="Inicia sesión" msg="Debes iniciar sesión antes de continuar." />
                         }
