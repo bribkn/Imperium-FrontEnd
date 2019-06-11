@@ -1,6 +1,7 @@
 /* CHECKBOX STUFF */
 .checkbox-container{
     width: 50%;
+    background-color: #FFFFFF;
 }
 /*
 claro #55ab68
@@ -8,7 +9,10 @@ oscuro #1b4128
 */
 
 
-
+.container {
+    background-color: #FFFFFF;
+    width: 60%;
+}
 
 
 .info-checkbox{

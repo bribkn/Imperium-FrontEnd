@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import RequireLogin from '../components/RequireLogin';
 import Block from '../components/Block';
 import Checkbox from '../components/Checkbox';
-import {Spinner,Table} from 'react-bootstrap'
+import {Spinner} from 'react-bootstrap'
 
 import '../App.css';
 import '../css/Dashboard.css';
@@ -71,7 +71,8 @@ class List extends Component {
     RenderStudent = ({id, nombre, apellido}) =>
         <div key={id}>
                 <Checkbox
-                    title= "Hola" name= {nombre + " "+ apellido}
+                    name= {nombre + " "+ apellido}
+                    id = {id}
                 />
         </div>
     render() {
