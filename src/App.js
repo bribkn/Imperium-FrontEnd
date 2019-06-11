@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import StudentData from './pages/StudentData';
 import List from './pages/List';
+import Test from './pages/Test';
 
 class App extends Component {
     render(){
@@ -21,6 +22,7 @@ class App extends Component {
                         <Route path="/Profile" component={Profile} />
                         <Route path="/StudentData" component={StudentData} />
                         <Route path="/List" component={List} />
+                        <Route path="/Test" component={Test} />
                     </div>
                 </div>
             </Router>

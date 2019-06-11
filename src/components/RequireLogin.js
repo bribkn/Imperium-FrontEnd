@@ -10,7 +10,9 @@ class RequireLogin extends Component{
         this.SaveSession = this.SaveSession.bind(this);
         this.HandleLogout = this.HandleLogout.bind(this);
 
-        this.host = "http://imperium-be.herokuapp.com";
+        // this.URL = "http://imperium-be.herokuapp.com";
+        this.URL = "http://localhost:8000";
+        
         this.state = {
             Submitted: false,
             Show: true,
@@ -44,7 +46,7 @@ class RequireLogin extends Component{
         if ( rut === '' || password === '' ) {
             this.setState({ Submitted: false });
         }else{
-            fetch(this.host+`/login?rut=${rut}&password=${password}`)
+            fetch(this.URL+`/login?rut=${rut}&password=${password}`)
             .then(response => response.json())
             .then(resp => this.setState({ FetchedUser: resp.data[0]} ))
             .then(r => this.SaveSession() )

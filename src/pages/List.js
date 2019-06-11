@@ -48,7 +48,7 @@ class List extends Component {
 
     GetStudentsData = _ =>{
         var FetchURL = this.URL+`/students/tio?rut=`+this.state.UserRUT;
-        console.log(FetchURL);
+
         fetch(FetchURL)
         .then(response => response.json())
         .then(resp => this.setState({ Students: resp.data }))
@@ -68,14 +68,13 @@ class List extends Component {
         this.setState({ UserAddress: localStorage.getItem('UserAddress') })
         this.setState({ UserRol: localStorage.getItem('UserRol') })
     }
-    RenderStudent = ({id,nombre,apellido,nivel,patente_furgon,curso,tipo_viaje,sector}) =>
+    RenderStudent = ({id, nombre, apellido, nivel, patente_furgon, curso, tipo_viaje, sector}) =>
         <tr key={id}>
             <td>{nombre}</td>
             <td>{apellido}</td>
-                <Checkbox
-                    title= "Hola"
-                />
+            <Checkbox title= "Hola" />
         </tr>
+
     render() {
         const { UserLoggedIn } = this.state;
         const { Students } = this.state;
