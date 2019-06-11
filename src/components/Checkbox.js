@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {ButtonGroup,ToggleButton} from 'react-bootstrap'
+import {ButtonGroup,Button,Container,Row,Col} from 'react-bootstrap'
 
 
 class Checkbox extends Component{
@@ -16,7 +16,7 @@ class Checkbox extends Component{
 
     handleCheckboxChange = event => {
         this.setState({ checked: event.target.checked })
-        console.log("Cambiando ticket: %s", this.state.checked);
+        console.log("Cambiando estado alumno: %s", this.state.checked);
     }
 
     handleTrue(){
@@ -28,22 +28,30 @@ class Checkbox extends Component{
     }
 
     render(){
+        console.log("Cambiando estado alumno %d: %s",this.props.id, this.state.checked);
         return(
             <div>
+            <Container>
+                <Row>
+                <Col>
+                <center>
                 {
                     this.props.name
                 }
-                <ButtonGroup toggle className="mt-3">
-                <ToggleButton type="radio" name="radio" defaultChecked value="1">
-                    <i className="fa fa-check" aria-hidden="true"></i>
-                </ToggleButton>
-                <ToggleButton type="radio" name="radio" value="2">
-                    <i className="fa fa-times" aria-hidden="true"></i>
-                </ToggleButton>
-                <ToggleButton type="radio" name="radio" value="3">
-                    <i class="fa fa-user-times" aria-hidden="true"></i>
-                </ToggleButton>
-                </ButtonGroup>
+                </center>
+                </Col>
+                <Col>
+                     <ButtonGroup aria-label="Basic example">
+                         <Button variant="success" onClick={this.handleTrue} size="lg">
+                             <i className="fa fa-check" aria-hidden="true"></i>
+                         </Button>
+                         <Button variant="danger" onClick = {this.handleFalse} size="lg">
+                             <i className="fa fa-times" aria-hidden="true"></i>
+                         </Button>
+                     </ButtonGroup>
+                </Col>
+                </Row>
+            </Container>
             </div>
 
         )

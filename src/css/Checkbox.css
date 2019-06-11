@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+=======
+/* CHECKBOX STUFF */
+.checkbox-container{
+    width: 50%;
+    background-color: #FFFFFF;
+}
+>>>>>>> brian
 /*
 claro #55ab68
 oscuro #1b4128
@@ -8,10 +16,18 @@ oscuro #1b4128
     width: 50%;
 }
 
+<<<<<<< HEAD
 /* CHECKBOX STUFF */
 .checkbox-item{
     width: 100%;
 }
+=======
+.container {
+    background-color: #FFFFFF;
+    width: 60%;
+}
+
+>>>>>>> brian
 
 .info-checkbox{
     background-color: #55ab68;
