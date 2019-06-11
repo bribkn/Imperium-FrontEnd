@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button,ButtonToolbar,Dropdown,DropdownButton,ButtonGroup} from 'react-bootstrap'
+import {Button,ButtonGroup} from 'react-bootstrap'
 
 
 class Checkbox extends Component{
@@ -29,8 +29,6 @@ class Checkbox extends Component{
 
     render(){
         return(
-            <div className="checkbox-container">
-               <div className="info-checkbox">
                     <ButtonGroup aria-label="Basic example">
                         <Button variant="success" onClick={this.handleTrue} size="lg">
                             <i class="fa fa-check" aria-hidden="true"></i>
@@ -39,9 +37,6 @@ class Checkbox extends Component{
                             <i class="fa fa-times" aria-hidden="true"></i>
                         </Button>
                     </ButtonGroup>
-                    <font size="4">{this.props.title}</font>
-               </div>
-            </div>
         )
     }
 }

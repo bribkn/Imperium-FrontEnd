@@ -37,7 +37,7 @@ class Navigation extends Component{
                         <li>
                             <Link to="/List">
                                 <div className="button-wrapper">
-                                    <i className="fa fa-book fa-fw"></i>List (Brian)
+                                    <i className="fa fa-book fa-fw"></i>Asistencia alumnos
                                 </div>
                             </Link>
                         </li>

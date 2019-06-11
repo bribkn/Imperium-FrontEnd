@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Block from '../components/Block';
 import RequireLogin from '../components/RequireLogin';
+import {Spinner} from 'react-bootstrap'
 
 import '../App.css';
 import '../css/Dashboard.css';
@@ -91,7 +92,9 @@ class Profile extends Component {
                                             PersonalDatas.length?
                                             PersonalDatas.map(this.RenderPersonalData)
                                             :
-                                            <div>Loading...</div>
+                                            <Spinner animation="border" role="status">
+                                                <span className="sr-only">Loading...</span>
+                                            </Spinner>
                                         }
                                         <button onClick={this.RequireLogin.current.HandleLogout} className="btn btn-primary">Logout</button>
                                     </div>
