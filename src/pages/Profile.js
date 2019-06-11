@@ -12,8 +12,8 @@ class Profile extends Component {
         this.UpdateData = this.UpdateData.bind(this);
         this.RequireLogin = React.createRef();
 
-        // this.URL = "https://imperium-be.herokuapp.com";
-        this.URL = "http://localhost:8000";
+        this.URL = "https://imperium-be.herokuapp.com";
+        //this.URL = "http://localhost:8000";
 
         this.state = {
             UserLoggedIn: false,
@@ -86,6 +86,7 @@ class Profile extends Component {
                             (UserLoggedIn === 'true')?
                             <div>
                                 <Block title={"Bienvenido, "+UserName } msg=
+                                {
                                     <div>
                                         {
                                             PersonalDatas.length?
@@ -95,6 +96,7 @@ class Profile extends Component {
                                         }
                                         <button onClick={this.RequireLogin.current.HandleLogout} className="btn btn-primary">Logout</button>
                                     </div>
+                                }
                                 />
                             </div>
                             :
