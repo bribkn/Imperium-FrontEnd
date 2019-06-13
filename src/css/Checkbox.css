@@ -7,21 +7,29 @@
 claro #55ab68
 oscuro #1b4128
 */
-
-/* CHECKBOX STUFF */
-.checkbox-container{
-    width: 50%;
+.student-name{
+    padding: 5.5%;
 }
-
 /* CHECKBOX STUFF */
 .checkbox-item{
     width: 100%;
 }
 .container {
-    background-color: #FFFFFF;
-    width: 60%;
-}
+    text-align: center;
 
+    background-color: #27ae60;
+    color: #FFFFFF;
+    width: 60%;
+    border-color: #000000;
+    border-style: double;
+    border-width: 5px;
+    border-radius: 20px;
+    margin-top: 1px;
+    margin-bottom: 0px;
+    margin-right: 1px;
+    margin-left: 1px;
+    padding: auto;
+}
 .info-checkbox{
     background-color: #55ab68;
     border: 1px solid #1b4128;

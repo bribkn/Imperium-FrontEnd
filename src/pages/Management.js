@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import RequireLogin from '../components/RequireLogin';
 import Block from '../components/Block';
-import Checkbox from '../components/Checkbox';
-import {Spinner} from 'react-bootstrap'
+import {Spinner,Table} from 'react-bootstrap'
 
 import '../App.css';
 import '../css/Dashboard.css';
-import '../css/Checkbox.css';
 
-class List extends Component {
+class StudentData extends Component {
 
     constructor(props, context){
         super(props, context);
@@ -37,7 +35,7 @@ class List extends Component {
                 curso: '',
                 tipo_viaje: '',
                 sector: '',
-            },
+            }
         }
     }
 
@@ -48,7 +46,7 @@ class List extends Component {
 
     GetStudentsData = _ =>{
         var FetchURL = this.URL+`/students/tio?rut=`+this.state.UserRUT;
-
+        console.log(FetchURL);
         fetch(FetchURL)
         .then(response => response.json())
         .then(resp => this.setState({ Students: resp.data }))
@@ -69,13 +67,17 @@ class List extends Component {
         this.setState({ UserRol: localStorage.getItem('UserRol') })
     }
 
-    RenderStudent = ({id, nombre, apellido}) =>
-        <div key={id}>
-                <Checkbox
-                    name= {nombre + " "+ apellido}
-                    id = {id}
-                />
-        </div>
+    RenderStudent = ({id,nombre,apellido,nivel,patente_furgon,curso,tipo_viaje,sector}) =>
+        <tr key={id}>
+            <td>{id}</td>
+            <td>{nombre}</td>
+            <td>{apellido}</td>
+            <td>{nivel}</td>
+            <td>{patente_furgon}</td>
+            <td>{curso}</td>
+            <td>{tipo_viaje}</td>
+            <td>{sector}</td>
+        </tr>
 
     render() {
         const { UserLoggedIn } = this.state;
@@ -85,16 +87,32 @@ class List extends Component {
             <div>
                 <RequireLogin UpdateData = {this.UpdateData} ref={this.RequireLogin}/>
                     <div className="page-title">
-                        <h1>Lista de alumnos</h1>
+                        <h1>Modificar datos alumnos</h1>
                         <hr />
                     </div>
                         {
                             (UserLoggedIn === 'true')?
                                 (Students.length)?
                                 <div>
+                                    <Table striped bordered hover variant="dark">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Nombre</th>
+                                                <th>Apellido</th>
+                                                <th>Nivel</th>
+                                                <th>Patente</th>
+                                                <th>Curso</th>
+                                                <th>Tipo Viaje</th>
+                                                <th>Sector</th>
+                                            </tr>
+                                         </thead>
+                                         <tbody>
                                             {
                                                 Students.map(this.RenderStudent)
                                             }
+                                        </tbody>
+                                    </Table>
                                 </div>
                                 :
                                 <Spinner animation="border" role="status">
@@ -108,4 +126,5 @@ class List extends Component {
     }
 }
 
-export default List  ;
+
+export default StudentData  ;

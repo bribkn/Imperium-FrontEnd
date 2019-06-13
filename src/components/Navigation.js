@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../images/logo.png';
 
 class Navigation extends Component{
     render(){
         return(
             <div className="nav-side-menu">
-                <div className="brand">Imperium</div>
+                <div className="brand">
+                    <img src={logo} alt="Logo"/> Imperium &nbsp; &nbsp;
+                </div>
                 <i className="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 
                 <div className="menu-list">
@@ -25,7 +28,6 @@ class Navigation extends Component{
                                 </div>
                             </Link>
                         </li>
-
                         <li>
                             <Link to="/StudentData">
                                 <div className="button-wrapper">
@@ -33,7 +35,13 @@ class Navigation extends Component{
                                 </div>
                             </Link>
                         </li>
-
+                        <li>
+                            <Link to="/Management">
+                                <div className="button-wrapper">
+                                    <i className="fa fa-book fa-fw"></i>Modificar datos alumnos
+                                </div>
+                            </Link>
+                        </li>
                         <li>
                             <Link to="/List">
                                 <div className="button-wrapper">
@@ -41,6 +49,7 @@ class Navigation extends Component{
                                 </div>
                             </Link>
                         </li>
+
                     </ul>
                 </div>
             </div>
