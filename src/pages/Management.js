@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import RequireLogin from '../components/RequireLogin';
 import Block from '../components/Block';
-import {Spinner,Table} from 'react-bootstrap'
+import {Button,Tabs,Tab,Form,Col,Row} from 'react-bootstrap'
 
 import '../App.css';
-import '../css/Dashboard.css';
+import '../css/Management.css';
 
-class StudentData extends Component {
+class ManagementData extends Component {
 
     constructor(props, context){
         super(props, context);
@@ -68,7 +68,7 @@ class StudentData extends Component {
     }
 
     RenderStudent = ({id,nombre,apellido,nivel,patente_furgon,curso,tipo_viaje,sector}) =>
-        <tr key={id}>
+        (<tr key={id}>
             <td>{id}</td>
             <td>{nombre}</td>
             <td>{apellido}</td>
@@ -77,9 +77,15 @@ class StudentData extends Component {
             <td>{curso}</td>
             <td>{tipo_viaje}</td>
             <td>{sector}</td>
-        </tr>
+        </tr>)
 
+    RenderModify = ({id,nombre,apellido}) =>(
+        <option key={id}>
+            {nombre + " " + apellido}
+        </option>
+        )
     render() {
+
         const { UserLoggedIn } = this.state;
         const { Students } = this.state;
 
@@ -90,41 +96,134 @@ class StudentData extends Component {
                         <h1>Modificar datos alumnos</h1>
                         <hr />
                     </div>
-                        {
-                            (UserLoggedIn === 'true')?
-                                (Students.length)?
-                                <div>
-                                    <Table striped bordered hover variant="dark">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Nombre</th>
-                                                <th>Apellido</th>
-                                                <th>Nivel</th>
-                                                <th>Patente</th>
-                                                <th>Curso</th>
-                                                <th>Tipo Viaje</th>
-                                                <th>Sector</th>
-                                            </tr>
-                                         </thead>
-                                         <tbody>
-                                            {
-                                                Students.map(this.RenderStudent)
-                                            }
-                                        </tbody>
-                                    </Table>
-                                </div>
-                                :
-                                <Spinner animation="border" role="status">
-                                    <span className="sr-only">Loading...</span>
-                                </Spinner>
-                            :
-                            <Block title="Inicia sesión" msg="Debes iniciar sesión antes de continuar." />
-                        }
+                    <div>
+                    {
+                        (UserLoggedIn === 'true')?
+                        <Tabs className= 'tablita' defaultActiveKey="add" id="uncontrolled-tab-example">
+                            <Tab className= 'tab' eventKey="add" title="Agregar">
+                                {
+                                    <Form>
+                                        <Form.Group controlId="exampleForm.ControlInput1">
+                                            <Form.Label>Nombre alumno</Form.Label>
+                                            <Form.Control type="name" placeholder="Ej: Brian" />
+                                            <Form.Label>Apellido alumno</Form.Label>
+                                            <Form.Control type="subname" placeholder="Ej: Bastías" />
+                                            <Form.Label>Nivel alumno</Form.Label>
+                                            <Form.Control as="select">
+                                                <option>Básica</option>
+                                                <option>Media</option>
+                                                <option>Kinder</option>
+                                                <option>Pre-kinder</option>
+                                            </Form.Control>
+                                            <Form.Label>Curso alumno</Form.Label>
+                                                    <Row>
+                                                        <Col>
+                                                            <Form.Control as="select">
+                                                                <option>1º</option>
+                                                                <option>2º</option>
+                                                                <option>3º</option>
+                                                                <option>4º</option>
+                                                                <option>5º</option>
+                                                                <option>6º</option>
+                                                                <option>7º</option>
+                                                                <option>8º</option>
+                                                                <option>No aplica</option>
+                                                            </Form.Control>
+                                                        </Col>
+                                                        <Col>
+                                                            <Form.Control as="select">
+                                                                <option>A</option>
+                                                                <option>B</option>
+                                                                <option>C</option>
+                                                                <option>D</option>
+                                                                <option>E</option>
+                                                                <option>F</option>
+                                                            </Form.Control>
+                                                        </Col>
+                                                    </Row>
+                                            <Form.Label>Sector Alumno</Form.Label>
+                                            <Form.Control type="sector" placeholder="Ej: 1-2" />
+                                        </Form.Group>
+                                        <Button variant="primary">
+                                            Agregar
+                                        </Button>
+                                    </Form>
+                                }
+                            </Tab>
+                            <Tab className= 'tab' eventKey="modify" title="Modificar">
+                                <Form>
+                                    <Form.Label>Seleccione alumno a modificar</Form.Label>
+                                    <Form.Group controlId="exampleForm.ControlInput1">
+                                        <Form.Control as="select">
+                                        {
+                                            Students.map(this.RenderModify)
+                                        }
+                                        </Form.Control>
+                                        <Form.Label>Nivel alumno</Form.Label>
+                                        <Form.Control as="select">
+                                            <option>Básica</option>
+                                            <option>Media</option>
+                                            <option>Kinder</option>
+                                            <option>Pre-kinder</option>
+                                        </Form.Control>
+                                        <Form.Label>Curso alumno</Form.Label>
+                                                <Row>
+                                                    <Col>
+                                                        <Form.Control as="select">
+                                                            <option>1º</option>
+                                                            <option>2º</option>
+                                                            <option>3º</option>
+                                                            <option>4º</option>
+                                                            <option>5º</option>
+                                                            <option>6º</option>
+                                                            <option>7º</option>
+                                                            <option>8º</option>
+                                                            <option>No aplica</option>
+                                                        </Form.Control>
+                                                    </Col>
+                                                    <Col>
+                                                        <Form.Control as="select">
+                                                            <option>A</option>
+                                                            <option>B</option>
+                                                            <option>C</option>
+                                                            <option>D</option>
+                                                            <option>E</option>
+                                                            <option>F</option>
+                                                        </Form.Control>
+                                                    </Col>
+                                                </Row>
+                                        <Form.Label>Sector Alumno</Form.Label>
+                                        <Form.Control type="sector" placeholder="Ej: 1-2" />
+                                    </Form.Group>
+                                    <Button variant="primary">
+                                        Modificar
+                                    </Button>
+                                </Form>
+                            </Tab>
+                            <Tab className= 'tab' eventKey="delete" title="Eliminar">
+                                <Form>
+                                    <Form.Label>Seleccione alumno a eliminar</Form.Label>
+                                    <Form.Group controlId="exampleForm.ControlInput1">
+                                        <Form.Control as="select">
+                                        {
+                                            Students.map(this.RenderModify)
+                                        }
+                                        </Form.Control>
+                                    </Form.Group>
+                                    <Button variant="primary">
+                                        Eliminar
+                                    </Button>
+                                </Form>
+                            </Tab>
+                        </Tabs>
+                        :
+                        <Block title="Inicia sesión" msg="Debes iniciar sesión antes de continuar." />
+                    }
                     </div>
+            </div>
         );
     }
 }
 
 
-export default StudentData  ;
+export default ManagementData  ;
