@@ -47,6 +47,23 @@ class Notifications extends Component {
         }
     }
 
+
+    HandleMessage = (event) => {
+        event.preventDefault();
+
+        var mensaje = event.target[0].value;
+        var FetchURL = this.URL+`/message/new?rut_emisor=`+this.state.UserRUT+`&rut_receptor=`+this.state.TargetUserRUT+`&mensaje=`+mensaje;
+
+        console.log(FetchURL);
+
+        fetch(FetchURL)
+        .then(response => response.json())
+        //.then(resp => this.setState({ FetchedUser: resp.data[0]} ))
+        .catch(err => console.error(err))
+
+        this.SwapMessageModal();
+    }
+
     // once logged in,
     componentDidMount(){
         this.UpdateData();
@@ -58,13 +75,18 @@ class Notifications extends Component {
         this.setState({ Show: !CurrentShowState });
     }
 
+    SwapMessageModal(){
+        var CurrentShowState = this.state.Show;
+        this.setState({ Show: !CurrentShowState});
+    }
+
     GetNames = _ => {
-        var FetchURL = this.URL+`/notification/search?rut=`+this.state.UserRUT;
+        var FetchURL = `${this.URL}/notification/search?rut=${this.state.UserRUT}`;
         console.log(FetchURL);
 
         fetch(FetchURL)
         .then(response => response.json())
-        .then(resp => this.setState({ Notifications: resp.data}))
+        .then(resp => this.setState({ Names: resp.data}))
         .catch(err => console.error(err))
     }
 
@@ -105,15 +127,15 @@ class Notifications extends Component {
     }
 
     RenderNames = ({rut, nombre, apellido}) => 
-    <Dropdown.Item onClick={ () => this.RenderModalWithTargetRUT(rut, nombre, apellido)}>
+    <Dropdown.Item key={rut} onClick={ () => this.RenderModalWithTargetRUT(rut, nombre, apellido)}>
         {"["+rut+"] "+ nombre + " " + apellido}
     </Dropdown.Item>
 
     RenderNotifications = ({id, nombre, apellido, mensaje, fecha}) =>
-    <Accordion defaultActiveKey="-1">
+    <Accordion key={id}>
         <Card>
             <Card.Header>
-            <Accordion.Toggle as={Button} variant="link" eventKey="0">
+            <Accordion.Toggle as={Button} variant="link" eventKey="0" >
                 {"De: " + nombre + " "+ apellido + " ["+fecha+"]"}
             </Accordion.Toggle>
             </Card.Header>
@@ -138,7 +160,7 @@ class Notifications extends Component {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                    {Names.map(this.RenderNames)}
+                    { Names.map(this.RenderNames) }
                 </Dropdown.Menu>
             </Dropdown>
 
@@ -148,23 +170,22 @@ class Notifications extends Component {
                 </Modal.Header>
                     
                 <Modal.Body>
-                    <Form>
-                        <Form.Group controlId="exampleForm.ControlTextarea1">
-                            <Form.Label>Ingrese su mensaje:</Form.Label>
-                            <Form.Control as="textarea" rows="3" />
-                        </Form.Group>
-                    </Form>
+                    <form id="MessageForm" onSubmit={this.HandleMessage}>
+                        <div className="form-group">
+                            <textarea placeholder="Ingrese su mensaje" id="mensaje" name="mensaje"  className="form-control" />
+                        </div>
+                    </form>
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="success">Enviar</Button>
+                    <Button form="MessageForm" type="submit" variant="success">Enviar</Button>
                     <button onClick={this.SwapLoginModal} className="btn btn-secondary">Cerrar</button>  
                 </Modal.Footer>
             </Modal>
             
             <br/>
             <h1> Mis Notificaciones: </h1>
-                {Notifications.map(this.RenderNotifications)}
+                { Notifications.map(this.RenderNotifications) }
             </div>
         )
     }
