@@ -121,11 +121,6 @@ code {
     }
 }
 
-/* CURSOR */
-td img{
-    cursor: pointer;
-}
-
 /* Modal stuff */
 .modal-backdrop.fade {
     opacity: 0;

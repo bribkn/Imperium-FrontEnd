@@ -1,9 +1,9 @@
+// Packages
 import React, { Component } from 'react';
-import Block from '../components/Block';
-import RequireLogin from '../components/RequireLogin';
+import { Card } from 'react-bootstrap';
 
-import '../App.css';
-import '../css/Dashboard.css';
+// Components
+import RequireLogin from '../components/RequireLogin';
 
 class Dashboard extends Component {
     constructor(props, context){
@@ -38,11 +38,14 @@ class Dashboard extends Component {
                     <hr />
                 </div>
 
-                <div className="row">
-                    <div className="col">
-                        <Block title="chaito" msg="holita" />
-                    </div>
-                </div>
+                <Card bg="info" text="white">
+                    <Card.Header as="h5">Holita</Card.Header>
+                    <Card.Body>
+                        <Card.Text>
+                            Como estás amigo, jeje
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
             </div>
         );
     }

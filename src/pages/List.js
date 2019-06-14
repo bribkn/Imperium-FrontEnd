@@ -1,14 +1,17 @@
+// Packages
 import React, { Component } from 'react';
-import RequireLogin from '../components/RequireLogin';
-import Block from '../components/Block';
-import Checkbox from '../components/Checkbox';
-<<<<<<< HEAD
-import {Spinner,Table} from 'react-bootstrap'
-=======
-import {Spinner} from 'react-bootstrap'
->>>>>>> origin/master
+import { Table, Card } from 'react-bootstrap'
 
-import '../App.css';
+// Components
+import RequireLogin from '../components/RequireLogin';
+import Checkbox from '../components/Checkbox';
+
+// Utility components
+import CenteredSpinner from '../components/utility/CenteredSpinner';
+import LoggedOutCard from '../components/utility/LoggedOutCard';
+import PageTitle from '../components/utility/PageTitle';
+
+// CSS
 import '../css/Dashboard.css';
 import '../css/Checkbox.css';
 
@@ -20,8 +23,8 @@ class List extends Component {
         this.UpdateData = this.UpdateData.bind(this);
         this.RequireLogin = React.createRef();
 
-        // this.URL = "https://imperium-be.herokuapp.com";
-        this.URL = "http://localhost:8000";
+        this.URL = "https://imperium-be.herokuapp.com";
+        // this.URL = "http://localhost:8000";
 
         this.state = {
             UserLoggedIn: false,
@@ -41,11 +44,7 @@ class List extends Component {
                 curso: '',
                 tipo_viaje: '',
                 sector: '',
-<<<<<<< HEAD
             }
-=======
-            },
->>>>>>> origin/master
         }
     }
 
@@ -55,7 +54,7 @@ class List extends Component {
     }
 
     GetStudentsData = _ =>{
-        var FetchURL = this.URL+`/students/tio?rut=`+this.state.UserRUT;
+        var FetchURL = `${this.URL}/students/tio?rut=${this.state.UserRUT}`;
 
         fetch(FetchURL)
         .then(response => response.json())
@@ -79,16 +78,9 @@ class List extends Component {
 
     RenderStudent = ({id, nombre, apellido}) =>
         <div key={id}>
-<<<<<<< HEAD
             <Checkbox
-                title= "Hola" name= {nombre + " "+ apellido}
+                title= "Hola" name={ nombre + " "+ apellido }
             />
-=======
-                <Checkbox
-                    name= {nombre + " "+ apellido}
-                    id = {id}
-                />
->>>>>>> origin/master
         </div>
 
     render() {
@@ -98,32 +90,19 @@ class List extends Component {
         return (
             <div>
                 <RequireLogin UpdateData = {this.UpdateData} ref={this.RequireLogin}/>
-                    <div className="page-title">
-                        <h1>Lista de alumnos</h1>
-                        <hr />
-                    </div>
-                        {
-                            (UserLoggedIn === 'true')?
-                                (Students.length)?
-<<<<<<< HEAD
-                                Students.map(this.RenderStudent)
-=======
-                                <div>
-                                            {
-                                                Students.map(this.RenderStudent)
-                                            }
-                                </div>
->>>>>>> origin/master
-                                :
-                                <Spinner animation="border" role="status">
-                                    <span className="sr-only">Loading...</span>
-                                </Spinner>
+                <PageTitle text="Lista de alumnos" />
+                    {
+                        (UserLoggedIn === 'true')?
+                            (Students.length)?
+                            Students.map(this.RenderStudent)
                             :
-                            <Block title="Inicia sesión" msg="Debes iniciar sesión antes de continuar." />
-                        }
-                    </div>
+                            <CenteredSpinner />
+                        :
+                        <LoggedOutCard />
+                    }
+            </div>
         );
     }
 }
 
-export default List  ;
+export default List;

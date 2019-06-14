@@ -1,7 +1,14 @@
+// Packages
 import React, { Component } from 'react';
-import Dropdown from 'react-bootstrap/Dropdown';
+import { Modal, Form, Button, Accordion, Card, Dropdown } from 'react-bootstrap';
+
+// Components
 import RequireLogin from '../components/RequireLogin';
-import {Modal, Form, Button,Accordion, Card} from 'react-bootstrap';
+
+// Utility components
+import CenteredSpinner from '../components/utility/CenteredSpinner';
+import LoggedOutCard from '../components/utility/LoggedOutCard';
+import PageTitle from '../components/utility/PageTitle';
 
 import '../App.css';
 import '../css/Dashboard.css';
@@ -14,8 +21,8 @@ class Notifications extends Component {
         this.SwapLoginModal = this.SwapLoginModal.bind(this);
         this.RequireLogin = React.createRef();
 
-        //this.URL = "https://imperium-be.herokuapp.com";
-        this.URL = "http://localhost:8000";
+        this.URL = "https://imperium-be.herokuapp.com";
+        // this.URL = "http://localhost:8000";
 
         this.state = {
             Show: false,
@@ -58,7 +65,6 @@ class Notifications extends Component {
 
         fetch(FetchURL)
         .then(response => response.json())
-        //.then(resp => this.setState({ FetchedUser: resp.data[0]} ))
         .catch(err => console.error(err))
 
         this.SwapMessageModal();
@@ -126,7 +132,7 @@ class Notifications extends Component {
         this.setState({ UserRol: localStorage.getItem('UserRol') })
     }
 
-    RenderNames = ({rut, nombre, apellido}) => 
+    RenderNames = ({rut, nombre, apellido}) =>
     <Dropdown.Item key={rut} onClick={ () => this.RenderModalWithTargetRUT(rut, nombre, apellido)}>
         {"["+rut+"] "+ nombre + " " + apellido}
     </Dropdown.Item>
@@ -146,6 +152,7 @@ class Notifications extends Component {
     </Accordion>
 
     render() {
+        const { UserLoggedIn } = this.state;
         const { Names } = this.state;
         const { Notifications } = this.state;
         const { Show } = this.state;
@@ -153,40 +160,61 @@ class Notifications extends Component {
 
         return (
             <div>
-                <h1>Enviar notificación personalizada:</h1>
-            <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                    Elegir Destinatario
-                </Dropdown.Toggle>
+            {
+                (UserLoggedIn === 'true')?
+                <div>
+                    <RequireLogin UpdateData = {this.UpdateData} ref={this.RequireLogin}/>
+                    <PageTitle text="Enviar notificación" />
 
-                <Dropdown.Menu>
-                    { Names.map(this.RenderNames) }
-                </Dropdown.Menu>
-            </Dropdown>
+                    {
+                        (Names.length)?
+                        <Dropdown>
+                            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                Elegir Destinatario
+                            </Dropdown.Toggle>
 
-            <Modal show={Show} animation={true} keyboard={true}>
-                <Modal.Header>
-                    <Modal.Title>{"Enviar a " + TargetUserName }</Modal.Title>
-                </Modal.Header>
-                    
-                <Modal.Body>
-                    <form id="MessageForm" onSubmit={this.HandleMessage}>
-                        <div className="form-group">
-                            <textarea placeholder="Ingrese su mensaje" id="mensaje" name="mensaje"  className="form-control" />
-                        </div>
-                    </form>
-                </Modal.Body>
+                            <Dropdown.Menu>
+                                { Names.map(this.RenderNames) }
+                            </Dropdown.Menu>
+                        </Dropdown>
+                        :
+                        <CenteredSpinner />
+                    }
 
-                <Modal.Footer>
-                    <Button form="MessageForm" type="submit" variant="success">Enviar</Button>
-                    <button onClick={this.SwapLoginModal} className="btn btn-secondary">Cerrar</button>  
-                </Modal.Footer>
-            </Modal>
-            
-            <br/>
-            <h1> Mis Notificaciones: </h1>
-                { Notifications.map(this.RenderNotifications) }
+                    <br/>
+                    <PageTitle text="Mis notificaciones" />
+
+                    {
+                        (Notifications.length)?
+                        Notifications.map(this.RenderNotifications)
+                        :
+                        <CenteredSpinner />
+                    }
+
+                    <Modal show={Show} animation={true} keyboard={true}>
+                        <Modal.Header>
+                            <Modal.Title>{"Enviar a " + TargetUserName }</Modal.Title>
+                        </Modal.Header>
+
+                        <Modal.Body>
+                            <form id="MessageForm" onSubmit={this.HandleMessage}>
+                                <div className="form-group">
+                                    <textarea placeholder="Ingrese su mensaje" id="mensaje" name="mensaje"  className="form-control" />
+                                </div>
+                            </form>
+                        </Modal.Body>
+
+                        <Modal.Footer>
+                            <Button form="MessageForm" type="submit" variant="success">Enviar</Button>
+                            <button onClick={this.SwapLoginModal} className="btn btn-secondary">Cerrar</button>
+                        </Modal.Footer>
+                    </Modal>
+                </div>
+                :
+                <LoggedOutCard />
+            }
             </div>
+
         )
     }
 }

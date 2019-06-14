@@ -1,10 +1,14 @@
+// Packages
 import React, { Component } from 'react';
-import Block from '../components/Block';
-import RequireLogin from '../components/RequireLogin';
-import {Spinner} from 'react-bootstrap'
+import { Card } from 'react-bootstrap';
 
-import '../App.css';
-import '../css/Dashboard.css';
+// Components
+import RequireLogin from '../components/RequireLogin';
+
+// Utility components
+import CenteredSpinner from '../components/utility/CenteredSpinner';
+import LoggedOutCard from '../components/utility/LoggedOutCard';
+import PageTitle from '../components/utility/PageTitle';
 
 class Profile extends Component {
     constructor(props, context){
@@ -13,13 +17,8 @@ class Profile extends Component {
         this.UpdateData = this.UpdateData.bind(this);
         this.RequireLogin = React.createRef();
 
-<<<<<<< HEAD
-        // this.URL = "https://imperium-be.herokuapp.com";
-        this.URL = "http://localhost:8000";
-=======
+        // this.URL = "http://localhost:8000";
         this.URL = "https://imperium-be.herokuapp.com";
-        //this.URL = "http://localhost:8000";
->>>>>>> origin/master
 
         this.state = {
             UserLoggedIn: false,
@@ -41,14 +40,13 @@ class Profile extends Component {
         }
     }
 
-    // once logged in,
+    // Get personal data on the web cache
     componentDidMount(){
         this.UpdateData();
     }
 
     GetPersonalData = _ => {
-        var FetchURL = this.URL+`/users/search?rut=`+this.state.UserRUT;
-        console.log(FetchURL);
+        var FetchURL = `${this.URL}/users/search?rut=${this.state.UserRUT}`;
 
         fetch(FetchURL)
         .then(response => response.json())
@@ -70,7 +68,6 @@ class Profile extends Component {
         this.setState({ UserRol: localStorage.getItem('UserRol') })
     }
 
-<<<<<<< HEAD
     RenderPersonalData = ({rut, nombre, apellido, telefono, direccion, rol}) => (
         <div key={rut}>
             {rut}<br />
@@ -78,11 +75,9 @@ class Profile extends Component {
             {apellido} <br />
             {telefono} <br />
             {direccion} <br />
+            <button onClick={this.RequireLogin.current.HandleLogout} className="btn btn-primary">Logout</button>
         </div>
     )
-=======
-    RenderPersonalData = ({rut, nombre, apellido, telefono, direccion, rol}) => <div key={rut}>{rut}<br /> {nombre} <br /> {apellido} <br /> {telefono} <br /> {direccion} <br /></div>
->>>>>>> origin/master
 
     render() {
         const { UserLoggedIn } = this.state;
@@ -92,60 +87,29 @@ class Profile extends Component {
         return (
             <div>
                 <RequireLogin UpdateData = {this.UpdateData} ref={this.RequireLogin}/>
+                <PageTitle text="Mi Perfil" />
 
-                <div className="page-title">
-                    <h1>Mi Perfil</h1>
-                    <hr />
-                </div>
+                {
+                    (UserLoggedIn === 'true')?
+                    <Card bg="info" text="white">
+                        <Card.Header as="h5">
+                            { "Bienvenido, " + UserName }
+                        </Card.Header>
 
-                <div className="row">
-                    <div className="col">
-                        {
-                            (UserLoggedIn === 'true')?
-<<<<<<< HEAD
-                            <Block title={"Bienvenido, " + UserName } msg=
-                                <div>
-                                    {
-                                        PersonalDatas.length?
-                                        <div>
-                                            { PersonalDatas.map(this.RenderPersonalData) }
-                                            <button onClick={this.RequireLogin.current.HandleLogout} className="btn btn-primary">Logout</button>
-                                        </div>
-                                        :
-                                        <center>
-                                            <Spinner animation="border" role="status">
-                                                <span className="sr-only">Loading...</span>
-                                            </Spinner>
-                                        </center>
-                                    }
-                                </div>
-                            />
-=======
-                            <div>
-                                <Block title={"Bienvenido, "+UserName } msg=
+                        <Card.Body>
+                            <Card.Text>
                                 {
-                                    <div>
-                                        {
-                                            PersonalDatas.length?
-                                            <div>
-                                            {PersonalDatas.map(this.RenderPersonalData)}
-                                            <button onClick={this.RequireLogin.current.HandleLogout} className="btn btn-primary">Logout</button>
-                                            </div>
-                                            :
-                                            <Spinner animation="border" role="status">
-                                                <span className="sr-only">Loading...</span>
-                                            </Spinner>
-                                        }
-                                    </div>
+                                    (PersonalDatas.length)?
+                                    PersonalDatas.map(this.RenderPersonalData)
+                                    :
+                                    <CenteredSpinner />
                                 }
-                                />
-                            </div>
->>>>>>> origin/master
-                            :
-                            <Block title="Inicia sesión" msg="Debes iniciar sesión antes de continuar." />
-                        }
-                    </div>
-                </div>
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
+                    :
+                    <LoggedOutCard />
+                }
             </div>
         );
     }

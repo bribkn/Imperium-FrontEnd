@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import RequireLogin from '../components/RequireLogin';
-import Block from '../components/Block';
-import {Button,Tabs,Tab,Form,Col,Row} from 'react-bootstrap'
+import { Button, Tabs, Tab, Form, Col, Row, Card } from 'react-bootstrap'
 
 import '../App.css';
 import '../css/Management.css';
 
-class ManagementData extends Component {
+class Management extends Component {
 
     constructor(props, context){
         super(props, context);
@@ -14,8 +13,8 @@ class ManagementData extends Component {
         this.UpdateData = this.UpdateData.bind(this);
         this.RequireLogin = React.createRef();
 
-        // this.URL = "https://imperium-be.herokuapp.com";
-        this.URL = "http://localhost:8000";
+        this.URL = "https://imperium-be.herokuapp.com";
+        // this.URL = "http://localhost:8000";
 
         this.state = {
             UserLoggedIn: false,
@@ -217,13 +216,18 @@ class ManagementData extends Component {
                             </Tab>
                         </Tabs>
                         :
-                        <Block title="Inicia sesión" msg="Debes iniciar sesión antes de continuar." />
+                        <Card bg="info" text="white">
+                            <Card.Header as="h5">Inicia sesión</Card.Header>
+                            <Card.Body>
+                                <Card.Text>
+                                    Debes iniciar sesión antes de continuar.
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
                     }
                     </div>
             </div>
         );
     }
 }
-
-
-export default ManagementData  ;
+export default Management;

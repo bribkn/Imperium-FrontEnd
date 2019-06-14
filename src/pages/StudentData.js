@@ -1,10 +1,14 @@
+// Packages
 import React, { Component } from 'react';
-import RequireLogin from '../components/RequireLogin';
-import Block from '../components/Block';
-import {Spinner,Table} from 'react-bootstrap'
+import { Spinner, Table, Card } from 'react-bootstrap'
 
-import '../App.css';
-import '../css/Dashboard.css';
+// Components
+import RequireLogin from '../components/RequireLogin';
+
+// Utility components
+import CenteredSpinner from '../components/utility/CenteredSpinner';
+import LoggedOutCard from '../components/utility/LoggedOutCard';
+import PageTitle from '../components/utility/PageTitle';
 
 class StudentData extends Component {
 
@@ -14,8 +18,8 @@ class StudentData extends Component {
         this.UpdateData = this.UpdateData.bind(this);
         this.RequireLogin = React.createRef();
 
-        // this.URL = "https://imperium-be.herokuapp.com";
-        this.URL = "http://localhost:8000";
+        this.URL = "https://imperium-be.herokuapp.com";
+        // this.URL = "http://localhost:8000";
 
         this.state = {
             UserLoggedIn: false,
@@ -45,8 +49,8 @@ class StudentData extends Component {
     }
 
     GetStudentsData = _ =>{
-        var FetchURL = this.URL+`/students/tio?rut=`+this.state.UserRUT;
-        console.log(FetchURL);
+        var FetchURL = `${this.URL}/students/tio?rut=${this.state.UserRUT}`;
+
         fetch(FetchURL)
         .then(response => response.json())
         .then(resp => this.setState({ Students: resp.data }))
@@ -78,7 +82,7 @@ class StudentData extends Component {
             <td>{tipo_viaje}</td>
             <td>{sector}</td>
         </tr>
-        
+
     render() {
         const { UserLoggedIn } = this.state;
         const { Students } = this.state;
@@ -86,49 +90,36 @@ class StudentData extends Component {
         return (
             <div>
                 <RequireLogin UpdateData = {this.UpdateData} ref={this.RequireLogin}/>
-                    <div className="page-title">
-<<<<<<< HEAD
-                        <h1>Datos de alumnos</h1>
-=======
-                        <h1>Lista de alumnos</h1>
->>>>>>> origin/master
-                        <hr />
-                    </div>
-                        {
-                            (UserLoggedIn === 'true')?
-                                (Students.length)?
-                                <div>
-                                    <Table striped bordered hover variant="dark">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Nombre</th>
-                                                <th>Apellido</th>
-                                                <th>Nivel</th>
-                                                <th>Patente</th>
-                                                <th>Curso</th>
-                                                <th>Tipo Viaje</th>
-                                                <th>Sector</th>
-                                            </tr>
-                                         </thead>
-                                         <tbody>
-                                            {
-                                                Students.map(this.RenderStudent)
-                                            }
-                                        </tbody>
-                                    </Table>
-                                </div>
-                                :
-                                <Spinner animation="border" role="status">
-                                    <span className="sr-only">Loading...</span>
-                                </Spinner>
-                            :
-                            <Block title="Inicia sesión" msg="Debes iniciar sesión antes de continuar." />
-                        }
-                    </div>
-        );
+                <PageTitle text="Datos de alumnos" />
+                {
+                    (UserLoggedIn === 'true')?
+                        (Students.length)?
+                        <div>
+                            <Table striped bordered hover variant="dark">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
+                                        <th>Nivel</th>
+                                        <th>Patente</th>
+                                        <th>Curso</th>
+                                        <th>Tipo Viaje</th>
+                                        <th>Sector</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                    { Students.map(this.RenderStudent) }
+                                </tbody>
+                            </Table>
+                        </div>
+                        :
+                        <CenteredSpinner />
+                    :
+                    <LoggedOutCard />
+                }
+            </div>
+        )
     }
 }
-
-
-export default StudentData  ;
+export default StudentData;

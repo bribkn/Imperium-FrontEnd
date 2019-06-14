@@ -7,7 +7,7 @@ class Navigation extends Component{
         return(
             <div className="nav-side-menu">
                 <div className="brand">
-                    <img src={logo} alt="Logo"/> Imperium &nbsp; &nbsp;
+                    <img className="brand-logo" src={ logo } alt="Logo"/> Imperium &nbsp; &nbsp;
                 </div>
                 <i className="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 
@@ -53,6 +53,13 @@ class Navigation extends Component{
                             <Link to="/List">
                                 <div className="button-wrapper">
                                     <i className="fa fa-book fa-fw"></i>Asistencia alumnos
+                                </div>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/RealtimeMap">
+                                <div className="button-wrapper">
+                                    <i className="fa fa-book fa-fw"></i>Mapa en tiempo real
                                 </div>
                             </Link>
                         </li>
