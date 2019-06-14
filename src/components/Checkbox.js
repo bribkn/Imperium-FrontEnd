@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Container, Row, Col, Modal, Card } from 'react-bootstrap'
-
+import { Button, Container, Row, Col, Modal } from 'react-bootstrap'
 
 class Checkbox extends Component{
 

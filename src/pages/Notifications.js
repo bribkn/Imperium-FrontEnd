@@ -1,6 +1,6 @@
 // Packages
 import React, { Component } from 'react';
-import { Modal, Form, Button, Accordion, Card, Dropdown } from 'react-bootstrap';
+import { Modal, Button, Accordion, Card, Dropdown } from 'react-bootstrap';
 
 // Components
 import RequireLogin from '../components/RequireLogin';

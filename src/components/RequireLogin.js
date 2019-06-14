@@ -10,9 +10,9 @@ class RequireLogin extends Component{
         this.SaveSession = this.SaveSession.bind(this);
         this.HandleLogout = this.HandleLogout.bind(this);
 
-        // this.URL = "http://imperium-be.herokuapp.com";
-        this.URL = "http://localhost:8000";
-        
+        this.URL = "http://imperium-be.herokuapp.com";
+        // this.URL = "http://localhost:8000";
+
         this.state = {
             Submitted: false,
             Show: true,

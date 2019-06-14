@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 
 // Utility components
-import CenteredSpinner from '../components/utility/CenteredSpinner';
-import LoggedOutCard from '../components/utility/LoggedOutCard';
 import PageTitle from '../components/utility/PageTitle';
 
 // CSS

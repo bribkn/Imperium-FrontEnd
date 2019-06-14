@@ -1,6 +1,5 @@
 // Packages
 import React, { Component } from 'react';
-import { Table, Card } from 'react-bootstrap'
 
 // Components
 import RequireLogin from '../components/RequireLogin';
