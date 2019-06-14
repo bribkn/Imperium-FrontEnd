@@ -13,8 +13,8 @@ class Management extends Component {
         this.UpdateData = this.UpdateData.bind(this);
         this.RequireLogin = React.createRef();
 
-        this.URL = "https://imperium-be.herokuapp.com";
-        // this.URL = "http://localhost:8000";
+        // this.URL = "https://imperium-be.herokuapp.com";
+        this.URL = "http://localhost:8000";
 
         this.state = {
             UserLoggedIn: false,
@@ -24,6 +24,7 @@ class Management extends Component {
             UserContact: '',
             UserAddress: '',
             UserRol: '',
+            TioPatente: '',
             Students: [],
             Student:{
                 id: 0,
@@ -49,6 +50,25 @@ class Management extends Component {
         fetch(FetchURL)
         .then(response => response.json())
         .then(resp => this.setState({ Students: resp.data }))
+        .catch(err => console.error(err))
+    }
+
+    HandleAdd = (event) => {
+        event.preventDefault();
+        var name = event.target[0].value;
+        var subname = event.target[1].value;
+        var level = event.target[2].value;
+        var classNumber = event.target[3].value;
+        var classLetter = event.target[4].value;
+        var travelType = event.target[5].value;
+        var sector = event.target[6].value;
+        var patente_furgon = 'PNPN69'
+        console.log(name,subname,level,classNumber,classLetter,sector);
+
+        var FetchURL = this.URL+`/students/register?nombre=`+name+`&apellido=`+subname+`&nivel=`+level+`&patente_furgon=`+patente_furgon+`&curso=`+classNumber+classLetter+`&tipo_viaje=`+travelType+`&sector=`+sector;
+        console.log(FetchURL);
+        fetch(FetchURL)
+        .then(response => response.json())
         .catch(err => console.error(err))
     }
 
@@ -101,8 +121,8 @@ class Management extends Component {
                         <Tabs className= 'tablita' defaultActiveKey="add" id="uncontrolled-tab-example">
                             <Tab className= 'tab' eventKey="add" title="Agregar">
                                 {
-                                    <Form>
-                                        <Form.Group controlId="exampleForm.ControlInput1">
+                                    <Form id="AddForm" onSubmit={this.HandleAdd}>
+                                        <Form.Group controlId="AddForm">
                                             <Form.Label>Nombre alumno</Form.Label>
                                             <Form.Control type="name" placeholder="Ej: Brian" />
                                             <Form.Label>Apellido alumno</Form.Label>
@@ -115,35 +135,41 @@ class Management extends Component {
                                                 <option>Pre-kinder</option>
                                             </Form.Control>
                                             <Form.Label>Curso alumno</Form.Label>
-                                                    <Row>
-                                                        <Col>
-                                                            <Form.Control as="select">
-                                                                <option>1º</option>
-                                                                <option>2º</option>
-                                                                <option>3º</option>
-                                                                <option>4º</option>
-                                                                <option>5º</option>
-                                                                <option>6º</option>
-                                                                <option>7º</option>
-                                                                <option>8º</option>
-                                                                <option>No aplica</option>
-                                                            </Form.Control>
-                                                        </Col>
-                                                        <Col>
-                                                            <Form.Control as="select">
-                                                                <option>A</option>
-                                                                <option>B</option>
-                                                                <option>C</option>
-                                                                <option>D</option>
-                                                                <option>E</option>
-                                                                <option>F</option>
-                                                            </Form.Control>
-                                                        </Col>
-                                                    </Row>
+                                                <Row>
+                                                    <Col>
+                                                        <Form.Control as="select">
+                                                            <option>1º</option>
+                                                            <option>2º</option>
+                                                            <option>3º</option>
+                                                            <option>4º</option>
+                                                            <option>5º</option>
+                                                            <option>6º</option>
+                                                            <option>7º</option>
+                                                            <option>8º</option>
+                                                            <option>No aplica</option>
+                                                        </Form.Control>
+                                                    </Col>
+                                                    <Col>
+                                                        <Form.Control as="select">
+                                                            <option>A</option>
+                                                            <option>B</option>
+                                                            <option>C</option>
+                                                            <option>D</option>
+                                                            <option>E</option>
+                                                            <option>F</option>
+                                                        </Form.Control>
+                                                    </Col>
+                                                </Row>
+                                            <Form.Label>Tipo de viaje</Form.Label>
+                                                <Form.Control as="select">
+                                                    <option>Ida</option>
+                                                    <option>Vuelta</option>
+                                                    <option>Completo</option>
+                                                </Form.Control>
                                             <Form.Label>Sector Alumno</Form.Label>
                                             <Form.Control type="sector" placeholder="Ej: 1-2" />
                                         </Form.Group>
-                                        <Button variant="primary">
+                                        <Button form="AddForm" type="submit" variant="primary">
                                             Agregar
                                         </Button>
                                     </Form>

@@ -18,8 +18,8 @@ class StudentData extends Component {
         this.UpdateData = this.UpdateData.bind(this);
         this.RequireLogin = React.createRef();
 
-        this.URL = "https://imperium-be.herokuapp.com";
-        // this.URL = "http://localhost:8000";
+        // this.URL = "https://imperium-be.herokuapp.com";
+        this.URL = "http://localhost:8000";
 
         this.state = {
             UserLoggedIn: false,
