@@ -1,14 +1,6 @@
 import React, { Component } from 'react';
 
 class Block extends Component{
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            isShow: true,
-        };
-    }
-
     render(){
         return(
             <div className="blocks-container">

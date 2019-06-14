@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import RequireLogin from '../components/RequireLogin';
 import Block from '../components/Block';
 import Checkbox from '../components/Checkbox';
+<<<<<<< HEAD
 import {Spinner,Table} from 'react-bootstrap'
+=======
+import {Spinner} from 'react-bootstrap'
+>>>>>>> origin/master
 
 import '../App.css';
 import '../css/Dashboard.css';
@@ -37,7 +41,11 @@ class List extends Component {
                 curso: '',
                 tipo_viaje: '',
                 sector: '',
+<<<<<<< HEAD
             }
+=======
+            },
+>>>>>>> origin/master
         }
     }
 
@@ -71,9 +79,16 @@ class List extends Component {
 
     RenderStudent = ({id, nombre, apellido}) =>
         <div key={id}>
+<<<<<<< HEAD
             <Checkbox
                 title= "Hola" name= {nombre + " "+ apellido}
             />
+=======
+                <Checkbox
+                    name= {nombre + " "+ apellido}
+                    id = {id}
+                />
+>>>>>>> origin/master
         </div>
 
     render() {
@@ -90,7 +105,15 @@ class List extends Component {
                         {
                             (UserLoggedIn === 'true')?
                                 (Students.length)?
+<<<<<<< HEAD
                                 Students.map(this.RenderStudent)
+=======
+                                <div>
+                                            {
+                                                Students.map(this.RenderStudent)
+                                            }
+                                </div>
+>>>>>>> origin/master
                                 :
                                 <Spinner animation="border" role="status">
                                     <span className="sr-only">Loading...</span>

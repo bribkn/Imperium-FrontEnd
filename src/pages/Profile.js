@@ -13,8 +13,13 @@ class Profile extends Component {
         this.UpdateData = this.UpdateData.bind(this);
         this.RequireLogin = React.createRef();
 
+<<<<<<< HEAD
         // this.URL = "https://imperium-be.herokuapp.com";
         this.URL = "http://localhost:8000";
+=======
+        this.URL = "https://imperium-be.herokuapp.com";
+        //this.URL = "http://localhost:8000";
+>>>>>>> origin/master
 
         this.state = {
             UserLoggedIn: false,
@@ -65,6 +70,7 @@ class Profile extends Component {
         this.setState({ UserRol: localStorage.getItem('UserRol') })
     }
 
+<<<<<<< HEAD
     RenderPersonalData = ({rut, nombre, apellido, telefono, direccion, rol}) => (
         <div key={rut}>
             {rut}<br />
@@ -74,6 +80,9 @@ class Profile extends Component {
             {direccion} <br />
         </div>
     )
+=======
+    RenderPersonalData = ({rut, nombre, apellido, telefono, direccion, rol}) => <div key={rut}>{rut}<br /> {nombre} <br /> {apellido} <br /> {telefono} <br /> {direccion} <br /></div>
+>>>>>>> origin/master
 
     render() {
         const { UserLoggedIn } = this.state;
@@ -93,6 +102,7 @@ class Profile extends Component {
                     <div className="col">
                         {
                             (UserLoggedIn === 'true')?
+<<<<<<< HEAD
                             <Block title={"Bienvenido, " + UserName } msg=
                                 <div>
                                     {
@@ -110,6 +120,27 @@ class Profile extends Component {
                                     }
                                 </div>
                             />
+=======
+                            <div>
+                                <Block title={"Bienvenido, "+UserName } msg=
+                                {
+                                    <div>
+                                        {
+                                            PersonalDatas.length?
+                                            <div>
+                                            {PersonalDatas.map(this.RenderPersonalData)}
+                                            <button onClick={this.RequireLogin.current.HandleLogout} className="btn btn-primary">Logout</button>
+                                            </div>
+                                            :
+                                            <Spinner animation="border" role="status">
+                                                <span className="sr-only">Loading...</span>
+                                            </Spinner>
+                                        }
+                                    </div>
+                                }
+                                />
+                            </div>
+>>>>>>> origin/master
                             :
                             <Block title="Inicia sesión" msg="Debes iniciar sesión antes de continuar." />
                         }

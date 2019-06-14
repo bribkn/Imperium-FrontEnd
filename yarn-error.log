@@ -1,0 +1,60 @@
+Arguments: 
+  /usr/local/Cellar/node/12.3.1/bin/node /usr/local/Cellar/yarn/1.16.0/libexec/bin/yarn.js add fsevents@1.2.8
+
+PATH: 
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Applications/Wireshark.app/Contents/MacOS
+
+Yarn version: 
+  1.16.0
+
+Node version: 
+  12.3.1
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: EACCES: permission denied, mkdir '/Users/brianbastias/Documents/Imperium/Imperium-FrontEnd/node_modules/@babel/core/node_modules/debug'
+
+npm manifest: 
+  {
+    "name": "imperium-frontend",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+      "bootstrap": "^4.3.1",
+      "email-validator": "^2.0.4",
+      "react": "^16.8.6",
+      "react-bootstrap": "^1.0.0-beta.9",
+      "react-dom": "^16.8.6",
+      "react-router-dom": "^5.0.0",
+      "react-scripts": "3.0.1"
+    },
+    "scripts": {
+      "start": "react-scripts start",
+      "build": "react-scripts build",
+      "test": "react-scripts test",
+      "eject": "react-scripts eject"
+    },
+    "eslintConfig": {
+      "extends": "react-app"
+    },
+    "browserslist": {
+      "production": [
+        ">0.2%",
+        "not dead",
+        "not op_mini all"
+      ],
+      "development": [
+        "last 1 chrome version",
+        "last 1 firefox version",
+        "last 1 safari version"
+      ]
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

@@ -87,7 +87,11 @@ class StudentData extends Component {
             <div>
                 <RequireLogin UpdateData = {this.UpdateData} ref={this.RequireLogin}/>
                     <div className="page-title">
+<<<<<<< HEAD
                         <h1>Datos de alumnos</h1>
+=======
+                        <h1>Lista de alumnos</h1>
+>>>>>>> origin/master
                         <hr />
                     </div>
                         {
