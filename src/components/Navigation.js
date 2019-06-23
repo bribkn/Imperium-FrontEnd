@@ -12,8 +12,8 @@ class Navigation extends Component{
 
         this.UpdateData = this.UpdateData.bind(this);
 
-        this.URL = "http://localhost:8000";
-        // this.URL = "https://imperium-be.herokuapp.com";
+        // this.URL = "http://localhost:8000";
+        this.URL = "https://imperium-be.herokuapp.com";
 
         this.state = {
             UserRol: 0
