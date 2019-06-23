@@ -8,7 +8,8 @@ import StudentData from './pages/StudentData';
 import List from './pages/List';
 import Notifications from './pages/Notifications';
 import Management from './pages/Management';
-import RealtimeMap from './pages/RealtimeMap';
+import ShareLocation from './pages/ShareLocation';
+import ViewLocation from './pages/ViewLocation';
 
 class App extends Component {
     render(){
@@ -25,7 +26,8 @@ class App extends Component {
                         <Route path="/List" component={ List } />
                         <Route path="/Notifications" component = { Notifications } />
                         <Route path="/Management" component = { Management } />
-                        <Route path="/RealtimeMap" component = { RealtimeMap } />
+                        <Route path="/ShareLocation" component = { ShareLocation } />
+                        <Route path="/ViewLocation" component = { ViewLocation } />
                     </div>
                 </div>
             </Router>

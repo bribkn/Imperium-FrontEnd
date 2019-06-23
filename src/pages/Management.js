@@ -119,22 +119,23 @@ class Management extends Component {
                     {
                         (UserLoggedIn === 'true')?
                         <Tabs className= 'tablita' defaultActiveKey="add" id="uncontrolled-tab-example">
-                            <Tab className= 'tab' eventKey="add" title="Agregar">
+                            <Tab className= 'tab-container' eventKey="add" title="Agregar">
                                 {
                                     <Form id="AddForm" onSubmit={this.HandleAdd}>
                                         <Form.Group controlId="AddForm">
                                             <Form.Label>Nombre alumno</Form.Label>
-                                            <Form.Control type="name" placeholder="Ej: Brian" />
+                                                <Form.Control type="name" placeholder="Ej: Brian" />
                                             <Form.Label>Apellido alumno</Form.Label>
-                                            <Form.Control type="subname" placeholder="Ej: Bastías" />
+                                                <Form.Control type="subname" placeholder="Ej: Bastías" />
                                             <Form.Label>Nivel alumno</Form.Label>
-                                            <Form.Control as="select">
-                                                <option>Básica</option>
-                                                <option>Media</option>
-                                                <option>Kinder</option>
-                                                <option>Pre-kinder</option>
-                                            </Form.Control>
+                                                <Form.Control as="select">
+                                                    <option>Básica</option>
+                                                    <option>Media</option>
+                                                    <option>Kinder</option>
+                                                    <option>Pre-kinder</option>
+                                                </Form.Control>
                                             <Form.Label>Curso alumno</Form.Label>
+                                            <div>
                                                 <Row>
                                                     <Col>
                                                         <Form.Control as="select">
@@ -160,6 +161,7 @@ class Management extends Component {
                                                         </Form.Control>
                                                     </Col>
                                                 </Row>
+                                            </div>
                                             <Form.Label>Tipo de viaje</Form.Label>
                                                 <Form.Control as="select">
                                                     <option>Ida</option>
@@ -175,7 +177,8 @@ class Management extends Component {
                                     </Form>
                                 }
                             </Tab>
-                            <Tab className= 'tab' eventKey="modify" title="Modificar">
+
+                            <Tab className= 'tab-container' eventKey='modify' title='Modificar'>
                                 <Form>
                                     <Form.Label>Seleccione alumno a modificar</Form.Label>
                                     <Form.Group controlId="exampleForm.ControlInput1">
@@ -225,7 +228,8 @@ class Management extends Component {
                                     </Button>
                                 </Form>
                             </Tab>
-                            <Tab className= 'tab' eventKey="delete" title="Eliminar">
+                            
+                            <Tab className= 'tab-container' eventKey="delete" title="Eliminar">
                                 <Form>
                                     <Form.Label>Seleccione alumno a eliminar</Form.Label>
                                     <Form.Group controlId="exampleForm.ControlInput1">

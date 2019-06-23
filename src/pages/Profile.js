@@ -97,14 +97,12 @@ class Profile extends Component {
                         </Card.Header>
 
                         <Card.Body>
-                            <Card.Text>
-                                {
-                                    (PersonalDatas.length)?
-                                    PersonalDatas.map(this.RenderPersonalData)
-                                    :
-                                    <CenteredSpinner />
-                                }
-                            </Card.Text>
+                            {
+                                (PersonalDatas.length)?
+                                PersonalDatas.map(this.RenderPersonalData)
+                                :
+                                <CenteredSpinner />
+                            }
                         </Card.Body>
                     </Card>
                     :

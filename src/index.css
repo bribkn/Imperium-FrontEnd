@@ -113,6 +113,7 @@ code {
 .button-wrapper{
     height: 100%;
     width: 100%;
+    padding-left: 2.5%;
 }
 @media (min-width: 767px) {
     .nav-side-menu .menu-list .menu-content {

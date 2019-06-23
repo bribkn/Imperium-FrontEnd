@@ -31,7 +31,7 @@ class Dashboard extends Component {
     render() {
         return (
             <div>
-                <RequireLogin UpdateData = {this.UpdateData} />
+                <RequireLogin UpdateData={this.UpdateData} />
 
                 <div className="page-title">
                     <h1>Escritorio</h1>

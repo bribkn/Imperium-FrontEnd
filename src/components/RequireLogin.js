@@ -23,7 +23,7 @@ class RequireLogin extends Component{
             UserNick: '',
             UserContact: '',
             UserAddress: '',
-            UserRol: ''
+            UserRol: 0
         }
     }
 
@@ -40,16 +40,17 @@ class RequireLogin extends Component{
     HandleLogin = (event) => {
         event.preventDefault();
 
-        var rut = event.target[0].value;
+        var rut = event.target[0].value.replace(/\D/g,'');
         var password = event.target[1].value;
 
         if ( rut === '' || password === '' ) {
             this.setState({ Submitted: false });
         }else{
-            fetch(this.URL+`/login?rut=${rut}&password=${password}`)
+            fetch(`${this.URL}/login?rut=${rut}&password=${password}`)
             .then(response => response.json())
             .then(resp => this.setState({ FetchedUser: resp.data[0]} ))
             .then(r => this.SaveSession() )
+            .then(r => window.location.reload() ) // solucion feik, eliminar luego xd
             .catch(err => console.error(err))
 
             this.setState({ Submitted: true });
@@ -69,12 +70,12 @@ class RequireLogin extends Component{
         localStorage.removeItem('UserRol');
 
         this.setState({ UserLoggedIn: 'false' });
-        this.setState({ UserRUT: '' });
+        this.setState({ UserRUT: 0 });
         this.setState({ UserName: '' });
         this.setState({ UserNick: '' });
         this.setState({ UserContact: '' });
         this.setState({ UserAddress: '' });
-        this.setState({ UserRol: '' });
+        this.setState({ UserRol: 0 });
 
         this.props.UpdateData();
         this.SwapLoginModal();

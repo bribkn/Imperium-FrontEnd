@@ -54,7 +54,6 @@ class Notifications extends Component {
         }
     }
 
-
     HandleMessage = (event) => {
         event.preventDefault();
 
@@ -92,7 +91,7 @@ class Notifications extends Component {
 
         fetch(FetchURL)
         .then(response => response.json())
-        .then(resp => this.setState({ Names: resp.data}))
+        .then(resp => this.setState({ Names: resp.data }))
         .catch(err => console.error(err))
     }
 
