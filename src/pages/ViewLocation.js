@@ -43,9 +43,9 @@ class ShareLocation extends Component {
         this.Timer = this.Timer.bind(this)
         this.RequireLogin = React.createRef();
 
-        this.URL = "http://localhost:8000";
+        // this.URL = "http://localhost:8000";
+        this.URL = "https://imperium-be.herokuapp.com";
         this.intervalId = 0;
-        // this.URL = "https://imperium-be.herokuapp.com";
 
         this.state = {
             UserLoggedIn: false,

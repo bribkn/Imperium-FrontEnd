@@ -47,8 +47,8 @@ class ShareLocation extends Component {
         this.UploadLocationToServer = this.UploadLocationToServer.bind(this);
         this.RequireLogin = React.createRef();
 
-        this.URL = "http://localhost:8000";
-        // this.URL = "https://imperium-be.herokuapp.com";
+        // this.URL = "http://localhost:8000";
+        this.URL = "https://imperium-be.herokuapp.com";
 
         this.state = {
             myCurrentCenter: {
