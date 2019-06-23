@@ -99,6 +99,7 @@ class ShareLocation extends Component {
 
     GetGeoLocation = () => {
         if (navigator.geolocation) {
+            console.log('RUUUNNING');
             this.watchId = navigator.geolocation.watchPosition(
                 (pos) => {
                     this.setState({
