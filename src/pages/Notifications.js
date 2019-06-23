@@ -22,7 +22,7 @@ class Notifications extends Component {
         this.RequireLogin = React.createRef();
 
         this.URL = "https://imperium-be.herokuapp.com";
-        // this.URL = "http://localhost:8000";
+        //this.URL = "http://localhost:8000";
 
         this.state = {
             Show: false,
@@ -49,7 +49,8 @@ class Notifications extends Component {
                 id: 0,
                 rut_emisor: 0,
                 rut_receptor:0,
-                mensaje: ''
+                mensaje: '',
+                fecha: 0
             }
         }
     }
@@ -58,7 +59,8 @@ class Notifications extends Component {
         event.preventDefault();
 
         var mensaje = event.target[0].value;
-        var FetchURL = this.URL+`/message/new?rut_emisor=`+this.state.UserRUT+`&rut_receptor=`+this.state.TargetUserRUT+`&mensaje=`+mensaje;
+        var fecha = new Date().toISOString().slice(0,19).replace('T',' ');
+        var FetchURL = this.URL+`/message/new?rut_emisor=`+this.state.UserRUT+`&rut_receptor=`+this.state.TargetUserRUT+`&mensaje=`+mensaje+`&fecha=`+fecha;
 
         console.log(FetchURL);
 
