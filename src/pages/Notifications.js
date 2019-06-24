@@ -22,7 +22,7 @@ class Notifications extends Component {
         this.RequireLogin = React.createRef();
 
         this.URL = "https://imperium-be.herokuapp.com";
-        // this.URL = "http://localhost:8000";
+        //this.URL = "http://localhost:8000";
 
         this.state = {
             Show: false,
@@ -49,7 +49,8 @@ class Notifications extends Component {
                 id: 0,
                 rut_emisor: 0,
                 rut_receptor:0,
-                mensaje: ''
+                mensaje: '',
+                fecha: 0
             },
             FetchDone: false
         }
