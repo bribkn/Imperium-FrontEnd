@@ -82,7 +82,8 @@ class ShareLocation extends Component {
         })
 
         if(this.state.currentCount < 1) {
-            clearInterval(this.intervalId);
+            this.setState({ currentCount: 5 })
+            // clearInterval(this.intervalId);
             // llama a la funcion constantemente
             this.GetGeoLocation();
         }
@@ -122,6 +123,7 @@ class ShareLocation extends Component {
 
     render() {
         const { RutTio } = this.state;
+        const { tioCurrentData } = this.state;
 
         return (
             <div>
@@ -136,11 +138,11 @@ class ShareLocation extends Component {
                                 bootstrapURLKeys={{ key: 'AIzaSyA6MB76H0PzRXkHTCmJwQmJX5_dyPZ8m3A' }}
                                 defaultCenter={ this.props.center }
                                 defaultZoom={ this.props.zoom }
-                                center={ this.state.tioCurrentData }
+                                center={ tioCurrentData }
                             >
                                 <AnyReactComponent
-                                    lat={ this.state.tioCurrentData.lat }
-                                    lng={ this.state.tioCurrentData.lng }
+                                    lat={ tioCurrentData.lat  }
+                                    lng={ tioCurrentData.lng }
                                     text="Tío"
                                 />
                             </GoogleMapReact>

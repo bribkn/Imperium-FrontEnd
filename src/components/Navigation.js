@@ -43,7 +43,7 @@ class Navigation extends Component{
                     <ul id="menu-content" className="menu-content collapse out">
 
                         {
-                            (UserRol === '0' || UserRol === '1' || UserRol === '2' || UserRol === '3' )?
+                            (UserRol === '0' || UserRol === '1' || UserRol === '2' || UserRol === '3' || UserRol === '10' )?
                             <li>
                                 <Link to="/Dashboard">
                                     <div className="button-wrapper">
@@ -55,7 +55,7 @@ class Navigation extends Component{
                         }
 
                         {
-                            (UserRol === '0' || UserRol === '1' || UserRol === '2' || UserRol === '3' )?
+                            (UserRol === '0' || UserRol === '1' || UserRol === '2' || UserRol === '3' || UserRol === '10' )?
                             <li>
                                 <Link to="/Profile">
                                     <div className="button-wrapper">
@@ -67,7 +67,7 @@ class Navigation extends Component{
                         }
 
                         {
-                            (UserRol === '0' || UserRol === '1' || UserRol === '2' || UserRol === '3' )?
+                            (UserRol === '0' || UserRol === '1' || UserRol === '2' || UserRol === '3' || UserRol === '10' )?
                             <li>
                                 <Link to="/Notifications">
                                     <div className="button-wrapper">
@@ -79,7 +79,7 @@ class Navigation extends Component{
                         }
 
                         {
-                            (UserRol === '2')?
+                            (UserRol === '2' || UserRol === '10')?
                             <li>
                                 <Link to="/StudentData">
                                     <div className="button-wrapper">
@@ -91,7 +91,7 @@ class Navigation extends Component{
                         }
 
                         {
-                            (UserRol === '2')?
+                            (UserRol === '2' || UserRol === '10')?
                             <li>
                                 <Link to="/Management">
                                     <div className="button-wrapper">
@@ -103,7 +103,7 @@ class Navigation extends Component{
                         }
 
                         {
-                            (UserRol === '2')?
+                            (UserRol === '2' || UserRol === '10')?
                             <li>
                                 <Link to="/List">
                                     <div className="button-wrapper">
@@ -115,7 +115,7 @@ class Navigation extends Component{
                         }
 
                         {
-                            (UserRol === '2')?
+                            (UserRol === '2' || UserRol === '10')?
                             <li>
                                 <Link to="/ShareLocation">
                                     <div className="button-wrapper">
@@ -127,7 +127,7 @@ class Navigation extends Component{
                         }
 
                         {
-                            (UserRol === '1')?
+                            (UserRol === '1' || UserRol === '10')?
                             <li>
                                 <Link to="/ViewLocation">
                                     <div className="button-wrapper">

@@ -89,6 +89,7 @@ class Checkbox extends Component{
                             ( show === true )?
                             <div>
                                 <button onClick={this.HandleConfirm} className="btn btn-primary">Confirmar</button>
+                                &nbsp;
                                 <button onClick={this.HandleCancel} className="btn btn-secondary">Cerrar</button>
                             </div>
                             :
@@ -99,31 +100,33 @@ class Checkbox extends Component{
 
                 {
                     (hidden ===  false)?
-                <Container animation={true}>
-                    <Row>
-                        <Col>
-                            <div className="student-name">
-                                <strong>
-                                    { this.props.name }
-                                </strong>
+                    <Container animation={true}>
+                        <Row>
+                            <Col>
+                                <div className="student-name">
+                                    <strong>
+                                        { this.props.name }
+                                    </strong>
+                                </div>
+                            </Col>
 
-                            </div>
-                        </Col>
-                        <Col>
-                            <Button variant="success" onClick={this.HandleChecked} size="lg">
+                            <Col>
+                                <Button variant="success" onClick={this.HandleChecked} size="lg">
                                     <i className="fa fa-check" aria-hidden="true"></i>
-                            </Button>
-                            <Button variant="danger" onClick={this.HandleFault}  size="lg">
-                                <i className="fa fa-times" aria-hidden="true"></i>
-                            </Button>
-                            <Button variant="primary" onClick = {this.HandleMissing} size="lg">
-                                <i className="fa fa-eye-slash" aria-hidden="true"></i>
-                            </Button>
-                        </Col>
-                    </Row>
-                </Container>
-                :
-                <div></div>
+                                </Button>
+
+                                <Button variant="danger" onClick={this.HandleFault}  size="lg">
+                                    <i className="fa fa-times" aria-hidden="true"></i>
+                                </Button>
+
+                                <Button variant="primary" onClick = {this.HandleMissing} size="lg">
+                                    <i className="fa fa-eye-slash" aria-hidden="true"></i>
+                                </Button>
+                            </Col>
+                        </Row>
+                    </Container>
+                    :
+                    <div></div>
                 }
 
             </div>

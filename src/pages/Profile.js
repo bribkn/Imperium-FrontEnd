@@ -1,6 +1,6 @@
 // Packages
 import React, { Component } from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, Badge, Col, Row } from 'react-bootstrap';
 
 // Components
 import RequireLogin from '../components/RequireLogin';
@@ -68,14 +68,43 @@ class Profile extends Component {
         this.setState({ UserRol: localStorage.getItem('UserRol') })
     }
 
+    GenerateRoleString = (rol) => {
+        if ( rol === 0 ) {
+            return "Inspector";
+        }else if( rol === 1 ){
+            return "Apoderado";
+        }else if( rol === 2 ){
+            return "Tío";
+        }else if( rol === 3 ){
+            return "Administrador";
+        }else if( rol === 10 ){
+            return "Dios";
+        }
+    }
+
     RenderPersonalData = ({rut, nombre, apellido, telefono, direccion, rol}) => (
-        <div key={rut}>
-            {rut}<br />
-            {nombre} <br />
-            {apellido} <br />
-            {telefono} <br />
-            {direccion} <br />
-            <button onClick={this.RequireLogin.current.HandleLogout} className="btn btn-primary">Logout</button>
+        <div className='personal-data-container' key={rut}>
+            <Row>
+                <Col sm={2}><b>RUT: </b></Col>
+                <Col sm={4}>{rut}</Col>
+
+                <Col sm={2}><b>Nombre: </b></Col>
+                <Col sm={4}>{nombre + ' ' + apellido} <Badge style={{'padding':'4px 2px'}}variant="warning">{this.GenerateRoleString(rol)}</Badge> </Col>
+            </Row>
+
+            <Row>
+                <Col sm={2}><b>Dirección: </b></Col>
+                <Col sm={4}>{direccion}</Col>
+
+                <Col sm={2}><b>Contacto: </b></Col>
+                <Col sm={4}>{telefono}</Col>
+            </Row>
+
+            <br />
+
+            <Row>
+                <Col md={{ span: 4, offset:5}}><button onClick={this.RequireLogin.current.HandleLogout} className="btn btn-danger">Cerrar sesión</button></Col>
+            </Row>
         </div>
     )
 

@@ -115,6 +115,12 @@ code {
     width: 100%;
     padding-left: 2.5%;
 }
+.brand-logo {
+    width: 25px;
+    height: 25px;
+    max-width: 25px;
+    max-height: 25px;
+}
 @media (min-width: 767px) {
     .nav-side-menu .menu-list .menu-content {
         display: block;

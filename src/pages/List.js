@@ -54,6 +54,7 @@ class List extends Component {
 
     GetStudentsData = _ =>{
         var FetchURL = `${this.URL}/students/tio?rut=${this.state.UserRUT}`;
+        console.log(FetchURL);
 
         fetch(FetchURL)
         .then(response => response.json())
@@ -78,7 +79,7 @@ class List extends Component {
     RenderStudent = ({id, nombre, apellido}) =>
         <div key={id}>
             <Checkbox
-                title= "Hola" name={ nombre + " "+ apellido }
+                title= "Hola" name={ nombre + " " + apellido }
             />
         </div>
 

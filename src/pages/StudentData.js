@@ -73,11 +73,9 @@ class StudentData extends Component {
 
     RenderStudent = ({id,nombre,apellido,nivel,patente_furgon,curso,tipo_viaje,sector}) =>
         <tr key={id}>
-            <td>{id}</td>
             <td>{nombre}</td>
             <td>{apellido}</td>
             <td>{nivel}</td>
-            <td>{patente_furgon}</td>
             <td>{curso}</td>
             <td>{tipo_viaje}</td>
             <td>{sector}</td>
@@ -98,11 +96,9 @@ class StudentData extends Component {
                             <Table striped bordered hover variant="dark">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
                                         <th>Nombre</th>
                                         <th>Apellido</th>
                                         <th>Nivel</th>
-                                        <th>Patente</th>
                                         <th>Curso</th>
                                         <th>Tipo Viaje</th>
                                         <th>Sector</th>

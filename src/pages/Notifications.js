@@ -50,7 +50,8 @@ class Notifications extends Component {
                 rut_emisor: 0,
                 rut_receptor:0,
                 mensaje: ''
-            }
+            },
+            FetchDone: false
         }
     }
 
@@ -58,7 +59,8 @@ class Notifications extends Component {
         event.preventDefault();
 
         var mensaje = event.target[0].value;
-        var FetchURL = this.URL+`/message/new?rut_emisor=`+this.state.UserRUT+`&rut_receptor=`+this.state.TargetUserRUT+`&mensaje=`+mensaje;
+        var fecha = new Date().toISOString().slice(0,19).replace('T',' ');
+        var FetchURL = this.URL+`/message/new?rut_emisor=`+this.state.UserRUT+`&rut_receptor=`+this.state.TargetUserRUT+`&mensaje=`+mensaje+`&fecha=`+fecha;
 
         console.log(FetchURL);
 
@@ -103,6 +105,7 @@ class Notifications extends Component {
         fetch(FetchURL)
         .then(response => response.json())
         .then(resp => this.setState({ Notifications: resp.data }))
+        .then(r => this.setState({ FetchDone: true }))
         .catch(err => console.error(err))
     }
 
@@ -167,15 +170,17 @@ class Notifications extends Component {
 
                     {
                         (Names.length)?
-                        <Dropdown>
-                            <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                Elegir Destinatario
-                            </Dropdown.Toggle>
+                        <center>
+                            <Dropdown>
+                                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                    Elegir Destinatario
+                                </Dropdown.Toggle>
 
-                            <Dropdown.Menu>
-                                { Names.map(this.RenderNames) }
-                            </Dropdown.Menu>
-                        </Dropdown>
+                                <Dropdown.Menu>
+                                    { Names.map(this.RenderNames) }
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        </center>
                         :
                         <CenteredSpinner />
                     }
@@ -187,7 +192,10 @@ class Notifications extends Component {
                         (Notifications.length)?
                         Notifications.map(this.RenderNotifications)
                         :
-                        <CenteredSpinner />
+                        (this.state.FetchDone === true)?
+                            <center>No tienes notificaciones</center>
+                            :
+                            <CenteredSpinner />
                     }
 
                     <Modal show={Show} animation={true} keyboard={true}>

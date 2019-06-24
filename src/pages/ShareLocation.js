@@ -67,8 +67,12 @@ class ShareLocation extends Component {
     }
 
     componentDidMount(){
-        this.GetGeoLocation();
+        setTimeout(this.GetGeoLocation.bind(this), 500)
         this.UpdateData();
+    }
+
+    componentWillUnmount(){
+        navigator.geolocation.clearWatch(this.watchId);
     }
 
     SwapSendingData = (event) => {
@@ -99,7 +103,6 @@ class ShareLocation extends Component {
 
     GetGeoLocation = () => {
         if (navigator.geolocation) {
-            console.log('RUUUNNING');
             this.watchId = navigator.geolocation.watchPosition(
                 (pos) => {
                     this.setState({
@@ -147,7 +150,6 @@ class ShareLocation extends Component {
                         <div className="map-div">
                             <GoogleMapReact
                                 bootstrapURLKeys={{ key: 'AIzaSyA6MB76H0PzRXkHTCmJwQmJX5_dyPZ8m3A' }}
-                                defaultCenter={ this.props.center }
                                 defaultZoom={ this.props.zoom }
                                 center={ this.state.myCurrentCenter }
                             >
