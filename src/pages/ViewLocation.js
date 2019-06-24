@@ -58,7 +58,7 @@ class ShareLocation extends Component {
             tioCurrentData: {
                 id: 0,
                 lat: -33.452515,
-                lng: -70.660553
+                lng: -70.660553,
                 fecha: '',
                 hora: ''
             },
