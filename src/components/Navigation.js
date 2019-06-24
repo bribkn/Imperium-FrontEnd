@@ -43,8 +43,8 @@ class Navigation extends Component{
                     <ul id="menu-content" className="menu-content collapse out">
 
                         {
-                            (UserRol === '0' || UserRol === '1' || UserRol === '2' || UserRol === '3' || UserRol === '10' )?
-                            /*<li>
+                            /*(UserRol === '0' || UserRol === '1' || UserRol === '2' || UserRol === '3' || UserRol === '10' )?
+                            <li>
                                 <Link to="/Dashboard">
                                     <div className="button-wrapper">
                                         <FontAwesomeIcon icon={faTachometerAlt} fixedWidth /> Escritorio
