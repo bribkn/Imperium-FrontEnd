@@ -19,7 +19,7 @@ class App extends Component {
                     <Navigation />
 
                     <div className="page-wrapper">
-                        <Route exact path="/" component={ Dashboard } />
+                        <Route exact path="/" component={ Profile } />
                         <Route path="/Dashboard" component={ Dashboard } />
                         <Route path="/Profile" component={ Profile } />
                         <Route path="/StudentData" component={ StudentData } />

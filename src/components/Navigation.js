@@ -44,14 +44,14 @@ class Navigation extends Component{
 
                         {
                             (UserRol === '0' || UserRol === '1' || UserRol === '2' || UserRol === '3' || UserRol === '10' )?
-                            <li>
+                            /*<li>
                                 <Link to="/Dashboard">
                                     <div className="button-wrapper">
                                         <FontAwesomeIcon icon={faTachometerAlt} fixedWidth /> Escritorio
                                     </div>
                                 </Link>
                             </li>:
-                            <div></div>
+                            <div></div>*/
                         }
 
                         {
