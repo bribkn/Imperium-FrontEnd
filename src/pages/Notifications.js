@@ -22,7 +22,7 @@ class Notifications extends Component {
         this.RequireLogin = React.createRef();
 
         this.URL = "https://imperium-be.herokuapp.com";
-        //this.URL = "http://localhost:8000";
+        // this.URL = "http://localhost:8000";
 
         this.state = {
             Show: false,

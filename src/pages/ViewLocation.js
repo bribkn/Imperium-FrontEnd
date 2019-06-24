@@ -5,6 +5,7 @@ import { Card } from 'react-bootstrap';
 
 // Utility components
 import PageTitle from '../components/utility/PageTitle';
+import CenteredSpinner from '../components/utility/CenteredSpinner';
 
 // CSS
 import '../css/Map.css';
@@ -59,12 +60,13 @@ class ShareLocation extends Component {
                 id: 0,
                 lat: -33.452515,
                 lng: -70.660553,
-                fecha: '',
-                hora: ''
+                fecha: ''
             },
             currentCount: 5,
             RutTio: 0,
-            isSendingData: false
+            isSendingData: false,
+            PositionFetchDone: false,
+            UTC: ''
         }
     }
 
@@ -111,11 +113,9 @@ class ShareLocation extends Component {
         rut = this.Clean(rut)
 
         var result = rut.slice(-4, -1) + '-' + rut.substr(rut.length - 1)
-
         for (var i = 4; i < rut.length; i += 3) {
             result = rut.slice(-3 - i, -i) + '.' + result
         }
-
         return result
     }
 
@@ -135,47 +135,61 @@ class ShareLocation extends Component {
         fetch(FetchURL)
         .then(response => response.json())
         .then(resp => this.setState({ tioCurrentData: resp.data[0] }))
-        .then(r => console.log(this.state.tioCurrentData))
+        .then(r => this.setState({ PositionFetchDone: true }))
         .catch(err => console.error(err))
     }
 
     render() {
         const { RutTio } = this.state;
         const { tioCurrentData } = this.state;
+        const { PositionFetchDone } = this.state;
 
         return (
             <div>
                 <PageTitle text="Mapa en tiempo real" />
+                {
+                    (PositionFetchDone === false)?
+                    <CenteredSpinner />:
+                    <Card bg="info" text="white">
+                        <Card.Header as="h5">Ubicación del tío: { this.FormatRUT(RutTio.toString()) }</Card.Header>
 
-                <Card bg="info" text="white">
-                    <Card.Header as="h5">Ubicación del tío: { this.FormatRUT(RutTio.toString()) }</Card.Header>
+                        <Card.Body>
+                            <div className="map-div">
+                                <GoogleMapReact
+                                    bootstrapURLKeys={{ key: 'AIzaSyA6MB76H0PzRXkHTCmJwQmJX5_dyPZ8m3A' }}
+                                    defaultCenter={ this.props.center }
+                                    defaultZoom={ this.props.zoom }
+                                    center={ tioCurrentData }
+                                >
+                                    {
+                                        (typeof tioCurrentData !== 'undefined')?
+                                        <AnyReactComponent
+                                            lat={ tioCurrentData.lat }
+                                            lng={ tioCurrentData.lng }
+                                            text="Tío"
+                                        />
+                                        :
+                                        <AnyReactComponent
+                                            lat={ this.props.center.lat }
+                                            lng={ this.props.center.lng }
+                                            text="No existen datos del tío"
+                                        />
+                                    }
+                                </GoogleMapReact>
+                            </div>
+                        </Card.Body>
 
-                    <Card.Body>
-                        <div className="map-div">
-                            <GoogleMapReact
-                                bootstrapURLKeys={{ key: 'AIzaSyA6MB76H0PzRXkHTCmJwQmJX5_dyPZ8m3A' }}
-                                defaultCenter={ this.props.center }
-                                defaultZoom={ this.props.zoom }
-                                center={ tioCurrentData }
-                            >
+                        <Card.Footer>
                                 {
-                                    (typeof tioCurrentData !== 'undefined')?
-                                    <AnyReactComponent
-                                        lat={ tioCurrentData.lat }
-                                        lng={ tioCurrentData.lng }
-                                        text="Tío"
-                                    />
-                                    :
-                                    <AnyReactComponent
-                                        lat={ this.props.center.lat }
-                                        lng={ this.props.center.lng }
-                                        text="No existen datos del tío"
-                                    />
+                                (typeof tioCurrentData !== 'undefined')?
+
+                                    `- Última actualización: hace ${(new Date().getTime() - new Date(tioCurrentData.fecha).getTime())/1000} segundos.`
+                                :
+                                '- No existen datos del tío'
                                 }
-                            </GoogleMapReact>
-                        </div>
-                    </Card.Body>
-                </Card>
+                        </Card.Footer>
+                    </Card>
+                }
             </div>
         );
     }

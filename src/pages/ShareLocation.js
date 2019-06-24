@@ -121,17 +121,22 @@ class ShareLocation extends Component {
 
     UploadLocationToServer(){
         if ( this.state.isSendingData ) {
-            var UploadURL = `${this.URL}/subirlltio?rut_tio=${this.state.UserRUT}&fecha=0&hora=0&latitud=${this.state.myCurrentCenter.lat}&longitud=${this.state.myCurrentCenter.lng}`;
-            console.log(`Publicando tu ubicación`);
+            var fecha = new Date()
+            fecha.setHours(fecha.getHours() - 4);
+            fecha = fecha.toISOString().slice(0,19).replace('T',' ');
+            var UploadURL = `${this.URL}/subirlltio?rut_tio=${this.state.UserRUT}&fecha=${fecha}&latitud=${this.state.myCurrentCenter.lat}&longitud=${this.state.myCurrentCenter.lng}`;
 
-            this.AlertsHandler.generate('success', 'Wow!', 'Enviando tu ubicación actual.');
+            // console.log(`Publicando tu ubicación`);
+            console.log(UploadURL);
+
+            // this.AlertsHandler.generate('success', 'Wow!', 'Enviando tu ubicación actual.');
 
             fetch(UploadURL)
             .then(response => response.json())
             .catch(err => console.error(err))
         }else{
             console.log(`No estás compartiendo la ubicación`);
-            this.AlertsHandler.generate('danger', 'Error!', 'Tu ubicación cambió, pero no la estás enviando.');
+            // this.AlertsHandler.generate('danger', 'Error!', 'Tu ubicación cambió, pero no la estás enviando.');
         }
     }
 
