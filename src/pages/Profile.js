@@ -40,6 +40,24 @@ class Profile extends Component {
         }
     }
 
+    Clean (rut) {
+        return typeof rut === 'string'
+        ? rut.replace(/^0+|[^0-9kK]+/g, '').toUpperCase()
+        : ''
+    }
+
+    FormatRUT (rut) {
+        rut = this.Clean(rut)
+
+        var result = rut.slice(-4, -1) + '-' + rut.substr(rut.length - 1)
+
+        for (var i = 4; i < rut.length; i += 3) {
+            result = rut.slice(-3 - i, -i) + '.' + result
+        }
+
+        return result
+    }
+
     // Get personal data on the web cache
     componentDidMount(){
         this.UpdateData();
@@ -86,10 +104,10 @@ class Profile extends Component {
         <div className='personal-data-container' key={rut}>
             <Row>
                 <Col sm={2}><b>RUT: </b></Col>
-                <Col sm={4}>{rut}</Col>
+                <Col sm={4}>{this.FormatRUT(rut.toString())}</Col>
 
                 <Col sm={2}><b>Nombre: </b></Col>
-                <Col sm={4}>{nombre + ' ' + apellido} <Badge style={{'padding':'4px 2px'}}variant="warning">{this.GenerateRoleString(rol)}</Badge> </Col>
+                <Col sm={4}>{nombre + ' ' + apellido} <Badge style={{'padding':'4px'}}variant="warning">{this.GenerateRoleString(rol)}</Badge> </Col>
             </Row>
 
             <Row>

@@ -10,7 +10,7 @@ import CenteredSpinner from '../components/utility/CenteredSpinner';
 import LoggedOutCard from '../components/utility/LoggedOutCard';
 import PageTitle from '../components/utility/PageTitle';
 
-class StudentData extends Component {
+class AllStudentData extends Component {
 
     constructor(props, context){
         super(props, context);
@@ -37,8 +37,15 @@ class StudentData extends Component {
                 nivel: '',
                 patente_furgon: '',
                 curso: '',
-                tipo_viaje: '',
-                sector: '',
+                rut_apoderado: '',
+                nombre_apoderado: '',
+                apellido_apoderado: '',
+                telefono_apoderado: '',
+                direccion: '',
+                rut_tio: '',
+                telefono_tio: '',
+                nombre_tio: '',
+                apellido_tio: ''
             },
             StudentsFetchDone: false
         }
@@ -50,7 +57,7 @@ class StudentData extends Component {
     }
 
     GetStudentsData = _ =>{
-        var FetchURL = `${this.URL}/students/tio?rut=${this.state.UserRUT}`;
+        var FetchURL = `${this.URL}/students/all`;
 
         fetch(FetchURL)
         .then(response => response.json())
@@ -73,14 +80,15 @@ class StudentData extends Component {
         this.setState({ UserRol: localStorage.getItem('UserRol') })
     }
 
-    RenderStudent = ({id,nombre,apellido,nivel,patente_furgon,curso,tipo_viaje,sector}) =>
+    RenderStudent = ({id,nombre_alumno,apellido_alumno,nivel,patente_furgon,curso,nombre_apoderado,apellido_apoderado,telefono_apoderado,direccion,rut_tio,telefono_tio,nombre_tio,apellido_tio}) =>
         <tr key={id}>
-            <td>{nombre}</td>
-            <td>{apellido}</td>
-            <td>{nivel}</td>
+            <td>{nombre_alumno+' '+apellido_alumno}</td>
             <td>{curso}</td>
-            <td>{tipo_viaje}</td>
-            <td>{sector}</td>
+            <td>{direccion}</td>
+            <td>{nombre_apoderado+' '+apellido_apoderado}</td>
+            <td>{telefono_apoderado}</td>
+            <td>{nombre_tio+' '+apellido_tio}</td>
+            <td>{telefono_tio}</td>
         </tr>
 
     render() {
@@ -91,6 +99,7 @@ class StudentData extends Component {
             <div>
                 <RequireLogin UpdateData = {this.UpdateData} ref={this.RequireLogin}/>
                 <PageTitle text="Datos de alumnos" />
+
                 {
                     (UserLoggedIn === 'true')?
                         (Students.length)?
@@ -99,11 +108,12 @@ class StudentData extends Component {
                                 <thead>
                                     <tr>
                                         <th>Nombre</th>
-                                        <th>Apellido</th>
-                                        <th>Nivel</th>
                                         <th>Curso</th>
-                                        <th>Tipo Viaje</th>
-                                        <th>Sector</th>
+                                        <th>Dirección</th>
+                                        <th>Apoderado</th>
+                                        <th>Cel. Apoderado</th>
+                                        <th>Tío</th>
+                                        <th>Cel. Tío</th>
                                     </tr>
                                  </thead>
                                  <tbody>
@@ -123,4 +133,4 @@ class StudentData extends Component {
         )
     }
 }
-export default StudentData;
+export default AllStudentData;

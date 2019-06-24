@@ -52,8 +52,27 @@ class Notifications extends Component {
                 mensaje: '',
                 fecha: 0
             },
-            FetchDone: false
+            TargetsFetchDone: false,
+            NotificationsFetchDone: false
         }
+    }
+
+    Clean (rut) {
+        return typeof rut === 'string'
+        ? rut.replace(/^0+|[^0-9kK]+/g, '').toUpperCase()
+        : ''
+    }
+
+    FormatRUT (rut) {
+        rut = this.Clean(rut)
+
+        var result = rut.slice(-4, -1) + '-' + rut.substr(rut.length - 1)
+
+        for (var i = 4; i < rut.length; i += 3) {
+            result = rut.slice(-3 - i, -i) + '.' + result
+        }
+
+        return result
     }
 
     HandleMessage = (event) => {
@@ -77,8 +96,8 @@ class Notifications extends Component {
         this.UpdateData();
     }
 
-     // This function helps Modal to be turn On/Off.
-     SwapLoginModal() {
+    // This function helps Modal to be turn On/Off.
+    SwapLoginModal() {
         var CurrentShowState = this.state.Show;
         this.setState({ Show: !CurrentShowState });
     }
@@ -95,6 +114,7 @@ class Notifications extends Component {
         fetch(FetchURL)
         .then(response => response.json())
         .then(resp => this.setState({ Names: resp.data }))
+        .then(r => this.setState({ TargetsFetchDone: true }))
         .catch(err => console.error(err))
     }
 
@@ -106,7 +126,7 @@ class Notifications extends Component {
         fetch(FetchURL)
         .then(response => response.json())
         .then(resp => this.setState({ Notifications: resp.data }))
-        .then(r => this.setState({ FetchDone: true }))
+        .then(r => this.setState({ NotificationsFetchDone: true }))
         .catch(err => console.error(err))
     }
 
@@ -137,7 +157,7 @@ class Notifications extends Component {
 
     RenderNames = ({rut, nombre, apellido}) =>
     <Dropdown.Item key={rut} onClick={ () => this.RenderModalWithTargetRUT(rut, nombre, apellido)}>
-        {"["+rut+"] "+ nombre + " " + apellido}
+        {"["+this.FormatRUT(rut.toString())+"] "+ nombre + " " + apellido}
     </Dropdown.Item>
 
     RenderNotifications = ({id, nombre, apellido, mensaje, fecha}) =>
@@ -183,7 +203,10 @@ class Notifications extends Component {
                             </Dropdown>
                         </center>
                         :
-                        <CenteredSpinner />
+                        (this.state.TargetsFetchDone === true)?
+                            <center>No tienes usuarios a quienes enviar notificaciones</center>
+                            :
+                            <CenteredSpinner />
                     }
 
                     <br/>
@@ -193,7 +216,7 @@ class Notifications extends Component {
                         (Notifications.length)?
                         Notifications.map(this.RenderNotifications)
                         :
-                        (this.state.FetchDone === true)?
+                        (this.state.NotificationsFetchDone === true)?
                             <center>No tienes notificaciones</center>
                             :
                             <CenteredSpinner />

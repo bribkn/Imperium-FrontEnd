@@ -5,6 +5,7 @@ import Navigation from './components/Navigation';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import StudentData from './pages/StudentData';
+import AllStudentData from './pages/AllStudentData';
 import List from './pages/List';
 import Notifications from './pages/Notifications';
 import Management from './pages/Management';
@@ -23,6 +24,7 @@ class App extends Component {
                         <Route path="/Dashboard" component={ Dashboard } />
                         <Route path="/Profile" component={ Profile } />
                         <Route path="/StudentData" component={ StudentData } />
+                        <Route path="/AllStudentData" component={ AllStudentData } />
                         <Route path="/List" component={ List } />
                         <Route path="/Notifications" component={ Notifications } />
                         <Route path="/Management" component={ Management } />

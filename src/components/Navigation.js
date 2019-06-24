@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faGlobe, faTachometerAlt, faUsers, faIdCard, faBell, faInfoCircle, faDatabase } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faGlobe, faUsers, faIdCard, faBell, faInfoCircle, faDatabase } from '@fortawesome/free-solid-svg-icons'
 
 import logo from '../images/logo.png';
 
@@ -67,7 +67,7 @@ class Navigation extends Component{
                         }
 
                         {
-                            (UserRol === '0' || UserRol === '1' || UserRol === '2' || UserRol === '3' || UserRol === '10' )?
+                            (UserRol === '1' || UserRol === '2' || UserRol === '3' || UserRol === '10' )?
                             <li>
                                 <Link to="/Notifications">
                                     <div className="button-wrapper">
@@ -82,6 +82,18 @@ class Navigation extends Component{
                             (UserRol === '2' || UserRol === '10')?
                             <li>
                                 <Link to="/StudentData">
+                                    <div className="button-wrapper">
+                                        <FontAwesomeIcon icon={faInfoCircle} fixedWidth /> Datos de alumnos
+                                    </div>
+                                </Link>
+                            </li>:
+                            <div></div>
+                        }
+
+                        {
+                            (UserRol === '0' || UserRol === '10')?
+                            <li>
+                                <Link to="/AllStudentData">
                                     <div className="button-wrapper">
                                         <FontAwesomeIcon icon={faInfoCircle} fixedWidth /> Datos de alumnos
                                     </div>

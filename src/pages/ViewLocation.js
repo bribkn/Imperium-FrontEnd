@@ -101,6 +101,24 @@ class ShareLocation extends Component {
         this.setState({ UserRol: localStorage.getItem('UserRol') })
     }
 
+    Clean (rut) {
+        return typeof rut === 'string'
+        ? rut.replace(/^0+|[^0-9kK]+/g, '').toUpperCase()
+        : ''
+    }
+
+    FormatRUT (rut) {
+        rut = this.Clean(rut)
+
+        var result = rut.slice(-4, -1) + '-' + rut.substr(rut.length - 1)
+
+        for (var i = 4; i < rut.length; i += 3) {
+            result = rut.slice(-3 - i, -i) + '.' + result
+        }
+
+        return result
+    }
+
     GetTioRut = _ => {
         var FetchURL = `${this.URL}/notification/search?rut=${this.state.UserRUT}`;
 
@@ -130,7 +148,7 @@ class ShareLocation extends Component {
                 <PageTitle text="Mapa en tiempo real" />
 
                 <Card bg="info" text="white">
-                    <Card.Header as="h5">Ubicación del tío { RutTio }</Card.Header>
+                    <Card.Header as="h5">Ubicación del tío: { this.FormatRUT(RutTio.toString()) }</Card.Header>
 
                     <Card.Body>
                         <div className="map-div">
@@ -140,11 +158,20 @@ class ShareLocation extends Component {
                                 defaultZoom={ this.props.zoom }
                                 center={ tioCurrentData }
                             >
-                                <AnyReactComponent
-                                    lat={ tioCurrentData.lat  }
-                                    lng={ tioCurrentData.lng }
-                                    text="Tío"
-                                />
+                                {
+                                    (typeof tioCurrentData !== 'undefined')?
+                                    <AnyReactComponent
+                                        lat={ tioCurrentData.lat }
+                                        lng={ tioCurrentData.lng }
+                                        text="Tío"
+                                    />
+                                    :
+                                    <AnyReactComponent
+                                        lat={ this.props.center.lat }
+                                        lng={ this.props.center.lng }
+                                        text="No existen datos del tío"
+                                    />
+                                }
                             </GoogleMapReact>
                         </div>
                     </Card.Body>
