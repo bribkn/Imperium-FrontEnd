@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Button, Container, Row, Col, Modal } from 'react-bootstrap'
 
+import AlertsHandler from './utility/AlertsHandler';
+
 class Checkbox extends Component{
 
     constructor(props){
@@ -51,20 +53,26 @@ class Checkbox extends Component{
     HandleCancel(){ //Cancelar confirmacion
         this.ToggleShow()
         this.setState({ checked: "unchecked"})
+        this.AlertsHandler.generate('danger', 'Oow!', 'Cancelaste el cambio de estado del alumno.');
     }
     HandleConfirm(){ //Aceptar confirmacion
         this.ToggleShow()
         this.ToggleHidden()
         this.setState({ checked: "fault"}) //Si no vino
+        this.AlertsHandler.generate('success', 'Wow!', 'Se ha cambiado el estado del alumno.');
     }
 
     render(){
-        const {hidden} = this.state
-        const {show} = this.state
+        const { hidden } = this.state
+        const { show } = this.state
+
         console.log("Cambiando estado alumno %d: %s",this.props.id, this.state.checked);
         console.log("Cambiando confirmacion alumno %d:",this.props.id, this.state.show);
+
         return(
             <div>
+                <AlertsHandler onRef={ref => (this.AlertsHandler = ref)} />
+
                 <Modal show={show} animation={true} backdrop={'static'} keyboard={false}>
                     <Modal.Header>
                         {
@@ -100,7 +108,7 @@ class Checkbox extends Component{
 
                 {
                     (hidden ===  false)?
-                    <Container animation={true}>
+                    <Container>
                         <Row>
                             <Col>
                                 <div className="student-name">

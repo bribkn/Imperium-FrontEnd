@@ -24,10 +24,10 @@ class App extends Component {
                         <Route path="/Profile" component={ Profile } />
                         <Route path="/StudentData" component={ StudentData } />
                         <Route path="/List" component={ List } />
-                        <Route path="/Notifications" component = { Notifications } />
-                        <Route path="/Management" component = { Management } />
-                        <Route path="/ShareLocation" component = { ShareLocation } />
-                        <Route path="/ViewLocation" component = { ViewLocation } />
+                        <Route path="/Notifications" component={ Notifications } />
+                        <Route path="/Management" component={ Management } />
+                        <Route path="/ShareLocation" component={ ShareLocation } />
+                        <Route path="/ViewLocation" component={ ViewLocation } />
                     </div>
                 </div>
             </Router>

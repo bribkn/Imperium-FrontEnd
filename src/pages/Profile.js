@@ -103,7 +103,7 @@ class Profile extends Component {
             <br />
 
             <Row>
-                <Col md={{ span: 4, offset:5}}><button onClick={this.RequireLogin.current.HandleLogout} className="btn btn-danger">Cerrar sesión</button></Col>
+                <Col md={{ span: 4, offset:5 }}><button onClick={this.RequireLogin.current.HandleLogout} className="btn btn-danger">Cerrar sesión</button></Col>
             </Row>
         </div>
     )

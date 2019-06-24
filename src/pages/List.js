@@ -90,6 +90,7 @@ class List extends Component {
         return (
             <div>
                 <RequireLogin UpdateData = {this.UpdateData} ref={this.RequireLogin}/>
+                
                 <PageTitle text="Lista de alumnos" />
                     {
                         (UserLoggedIn === 'true')?

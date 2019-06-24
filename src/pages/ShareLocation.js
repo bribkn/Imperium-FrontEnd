@@ -5,6 +5,8 @@ import { Button, Card } from 'react-bootstrap';
 
 // Utility components
 import PageTitle from '../components/utility/PageTitle';
+import AlertsHandler from '../components/utility/AlertsHandler';
+import RequireLogin from '../components/RequireLogin';
 
 // CSS
 import '../css/Map.css';
@@ -122,11 +124,14 @@ class ShareLocation extends Component {
             var UploadURL = `${this.URL}/subirlltio?rut_tio=${this.state.UserRUT}&fecha=0&hora=0&latitud=${this.state.myCurrentCenter.lat}&longitud=${this.state.myCurrentCenter.lng}`;
             console.log(`Publicando tu ubicación`);
 
+            this.AlertsHandler.generate('success', 'Wow!', 'Enviando tu ubicación actual.');
+
             fetch(UploadURL)
             .then(response => response.json())
             .catch(err => console.error(err))
         }else{
             console.log(`No estás compartiendo la ubicación`);
+            this.AlertsHandler.generate('danger', 'Error!', 'Tu ubicación cambió, pero no la estás enviando.');
         }
     }
 
@@ -135,35 +140,71 @@ class ShareLocation extends Component {
 
         return (
             <div>
+                <RequireLogin UpdateData = {this.UpdateData} ref={this.RequireLogin}/>
+                <AlertsHandler onRef={ref => (this.AlertsHandler = ref)} />
+
                 <PageTitle text="Mapa en tiempo real" />
+                {
+                    (isSendingData === true)?
+                    <Card bg="success" text="white">
+                        <Card.Header as="h5">
+                            {
+                                (isSendingData === true)?
+                                <div><img className='brand-logo' src={ ticket } alt='Compartiendo'/> Estás compartiendo tu ubicación</div>:
+                                <div><img className='brand-logo' src={ cross } alt='No compartiendo'/> No estás compartiendo tu ubicación</div>
+                            }
+                        </Card.Header>
 
-                <Card bg="info" text="white">
-                    <Card.Header as="h5">
-                        {
-                            (isSendingData === true)?
-                            <div><img className='brand-logo' src={ ticket } alt='Compartiendo'/> Estás compartiendo tu ubicación</div>:
-                            <div><img className='brand-logo' src={ cross } alt='No compartiendo'/> No estás compartiendo tu ubicación</div>
-                        }
-                    </Card.Header>
+                        <Card.Body>
+                            <div className="map-div">
+                                <GoogleMapReact
+                                    bootstrapURLKeys={{ key: 'AIzaSyA6MB76H0PzRXkHTCmJwQmJX5_dyPZ8m3A' }}
+                                    defaultZoom={ this.props.zoom }
+                                    center={ this.state.myCurrentCenter }
+                                >
+                                    <AnyReactComponent
+                                        lat={ this.state.myCurrentCenter.lat }
+                                        lng={ this.state.myCurrentCenter.lng }
+                                        text="Yo"
+                                    />
+                                </GoogleMapReact>
+                            </div>
+                        </Card.Body>
 
-                    <Card.Body>
-                        <div className="map-div">
-                            <GoogleMapReact
-                                bootstrapURLKeys={{ key: 'AIzaSyA6MB76H0PzRXkHTCmJwQmJX5_dyPZ8m3A' }}
-                                defaultZoom={ this.props.zoom }
-                                center={ this.state.myCurrentCenter }
-                            >
-                                <AnyReactComponent
-                                    lat={ this.state.myCurrentCenter.lat }
-                                    lng={ this.state.myCurrentCenter.lng }
-                                    text="Yo"
-                                />
-                            </GoogleMapReact>
-                        </div>
-                    </Card.Body>
+                        <Card.Footer style={{'textAlign':'center'}} className="text-muted"><Button variant="primary" onClick={this.SwapSendingData}>Compartir ubicación</Button></Card.Footer>
+                    </Card>
+                    :
+                    <Card bg="danger" text="white">
+                        <Card.Header as="h5">
+                            {
+                                (isSendingData === true)?
+                                <div><img className='brand-logo' src={ ticket } alt='Compartiendo'/> Estás compartiendo tu ubicación</div>
+                                :
+                                <div><img className='brand-logo' src={ cross } alt='No compartiendo'/> No estás compartiendo tu ubicación</div>
+                            }
+                        </Card.Header>
 
-                    <Card.Footer style={{'textAlign':'center'}} className="text-muted"><Button variant="primary" onClick={this.SwapSendingData}>Compartir ubicación</Button></Card.Footer>
-                </Card>
+                        <Card.Body>
+                            <div className="map-div">
+                                <GoogleMapReact
+                                    bootstrapURLKeys={{ key: 'AIzaSyA6MB76H0PzRXkHTCmJwQmJX5_dyPZ8m3A' }}
+                                    defaultZoom={ this.props.zoom }
+                                    center={ this.state.myCurrentCenter }
+                                >
+                                    <AnyReactComponent
+                                        lat={ this.state.myCurrentCenter.lat }
+                                        lng={ this.state.myCurrentCenter.lng }
+                                        text="Yo"
+                                    />
+                                </GoogleMapReact>
+                            </div>
+                        </Card.Body>
+
+                        <Card.Footer style={{'textAlign':'center'}} className="text-muted">
+                            <Button variant="primary" onClick={this.SwapSendingData}>Cambiar estado</Button>
+                        </Card.Footer>
+                    </Card>
+                }
             </div>
         );
     }

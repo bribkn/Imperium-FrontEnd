@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
+
+import AlertsHandler from './utility/AlertsHandler';
+
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 class RequireLogin extends Component{
@@ -23,7 +26,14 @@ class RequireLogin extends Component{
             UserNick: '',
             UserContact: '',
             UserAddress: '',
-            UserRol: 0
+            UserRol: 0,
+            shouldRefresh: false
+        }
+    }
+
+    WindowRefresher(){
+        if (this.state.shouldRefresh === true) {
+            window.location.reload()
         }
     }
 
@@ -50,7 +60,7 @@ class RequireLogin extends Component{
             .then(response => response.json())
             .then(resp => this.setState({ FetchedUser: resp.data[0]} ))
             .then(r => this.SaveSession() )
-            .then(r => window.location.reload() ) // solucion feik, eliminar luego xd
+            .then(r => this.WindowRefresher() )
             .catch(err => console.error(err))
 
             this.setState({ Submitted: true });
@@ -96,8 +106,11 @@ class RequireLogin extends Component{
             localStorage.setItem('UserContact', CurrentFetchedUser.telefono);
             localStorage.setItem('UserAddress', CurrentFetchedUser.direccion);
             localStorage.setItem('UserRol', CurrentFetchedUser.rol);
+
+            this.setState( { shouldRefresh: true });
         }else{
             console.log('Las credenciales no corresponden.');
+            this.AlertsHandler.generate('danger', 'Error!', 'Las credenciales no corresponden.');
             this.SwapLoginModal();
         }
 
@@ -117,6 +130,8 @@ class RequireLogin extends Component{
 
         return(
             <div>
+                <AlertsHandler onRef={ref => (this.AlertsHandler = ref)} />
+
                 <Modal show={Show} animation={true} backdrop={'static'} keyboard={false}>
                     <Modal.Header>
                         {
