@@ -39,6 +39,7 @@ class StudentData extends Component {
                 curso: '',
                 tipo_viaje: '',
                 sector: '',
+                telefono: ''
             },
             StudentsFetchDone: false
         }
@@ -73,7 +74,7 @@ class StudentData extends Component {
         this.setState({ UserRol: localStorage.getItem('UserRol') })
     }
 
-    RenderStudent = ({id,nombre,apellido,nivel,patente_furgon,curso,tipo_viaje,sector}) =>
+    RenderStudent = ({id,nombre,apellido,nivel,patente_furgon,curso,tipo_viaje,sector, telefono}) =>
         <tr key={id}>
             <td>{nombre}</td>
             <td>{apellido}</td>
@@ -81,6 +82,7 @@ class StudentData extends Component {
             <td>{curso}</td>
             <td>{tipo_viaje}</td>
             <td>{sector}</td>
+            <td>{telefono}</td>
         </tr>
 
     render() {
@@ -104,6 +106,7 @@ class StudentData extends Component {
                                         <th>Curso</th>
                                         <th>Tipo Viaje</th>
                                         <th>Sector</th>
+                                        <th>Cel. Apoderado</th>
                                     </tr>
                                  </thead>
                                  <tbody>
